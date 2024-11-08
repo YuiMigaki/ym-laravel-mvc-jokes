@@ -57,6 +57,22 @@
             </div>
         </section>
 
+
+        <section class="container mx-auto border grow h-full shadow-md p-4 pb-8 rounded space-y-2">
+            <h2 class="text-xl text-zinc-50 bg-zinc-600 p-4 pb-6 mb-6 -mx-4 -mt-4 rounded-t">
+                A brief overview of the application
+            </h2>
+
+            <div class="-mx-4 text-md text-semibold p-4 -mt-4 mb-4 rounded-t flex-0">
+                <p>
+                This application is a simple web application using PHP and elements of the MVC development methodology
+                    owned by RIoT Systems (Robotics & Internet of Things), a Perth based educational and development company
+                    who specialise in IoT, Robotics and Web Application systems.
+                </p>
+            </div>
+
+        </section>
+
         <section class="container mx-auto border grow h-full shadow-md p-4 pb-8 rounded space-y-2">
             <h2 class="text-xl text-zinc-50 bg-zinc-600 p-4 pb-6 mb-6 -mx-4 -mt-4 rounded-t">
                 Technologies
