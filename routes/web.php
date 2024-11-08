@@ -11,9 +11,9 @@ Route::get('welcome', [\App\Http\Controllers\StaticController::class, 'home'])
     ->name('welcome');
 
 // TODO: Add Routes for about and contact
-Route::get('about', [\App\Http\Controllers\StaticController::class, 'about'])
+Route::get('/about', [\App\Http\Controllers\StaticController::class, 'about'])
     ->name('about');
-Route::get('contact', [\App\Http\Controllers\StaticController::class, 'contact'])
+Route::get('/contact', [\App\Http\Controllers\StaticController::class, 'contact'])
     ->name('contact');
 
 Route::get('joke', [\App\Http\Controllers\JokeController::class, 'joke'])

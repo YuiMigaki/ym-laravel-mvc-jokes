@@ -23,24 +23,26 @@
                                     :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('joke')"
+                                    :active="request()->routeIs('joke')">
+                            {{ __('Joke') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('category')"
+                                    :active="request()->routeIs('category')">
+                            {{ __('Category') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('index')"
+                                    :active="request()->routeIs('users')">
+                            {{ __('Users') }}
+                        </x-nav-link>
                     @else
                         <x-nav-link :href="route('welcome')"
                                     :active="request()->routeIs('welcome')">
                             {{ __('Welcome') }}
                         </x-nav-link>
                     @endauth
-                    <x-nav-link :href="route('joke')"
-                                :active="request()->routeIs('joke')">
-                        {{ __('Joke') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('category')"
-                                :active="request()->routeIs('category')">
-                        {{ __('Category') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('index')"
-                                :active="request()->routeIs('users')">
-                        {{ __('Users') }}
-                    </x-nav-link>
+
                 </div>
 
                 <!-- Right Navigation Links -->
@@ -104,6 +106,18 @@
                         </x-nav-link>
                     @endif
                 @endauth
+
+                    <form method="GET" action="/search" class="block mx-5">
+                        <input type="text" name="keywords" placeholder="Keyword Search..."
+                               class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
+                        <button class="w-full md:w-auto
+                           bg-sky-500 hover:bg-sky-600
+                           text-white
+                           px-4 py-2
+                           focus:outline-none transition ease-in-out duration-500">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </form>
             </div>
 
             <!-- Hamburger -->

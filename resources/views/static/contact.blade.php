@@ -2,7 +2,7 @@
 
     <article class="flex flex-col gap-8">
         <header class="bg-zinc-700 text-zinc-200 -mx-8 -mt-8 rounded-t p-8 text-2xl font-bold ">
-            <h2 class="text-3xl">YOUR-GIVEN-NAME's Joke DB</h2>
+            <h2 class="text-3xl">Yui's Joke DB</h2>
             <h3 class="text-xl">Contact Us</h3>
         </header>
 

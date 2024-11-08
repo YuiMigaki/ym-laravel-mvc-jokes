@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
-            YUI's {{ __('Joke DB') }}
+            Yui's {{ __('Joke DB') }}
         </h2>
     </x-slot>
 
@@ -14,6 +14,8 @@
         </header>
 
         <div class="flex flex-col flex-wrap my-4 mt-8">
+
+            @auth
             <section class="grid grid-cols-1 gap-4 px-4 mt-4 sm:grid-cols-3 sm:px-8">
 
                 <section class="rounded flex items-center bg-lime-200 border border-lime-600 overflow-hidden">
@@ -48,6 +50,7 @@
 
 
             </section>
+            @endauth
 
             <section class="grid grid-cols-1 gap-4 px-4 mt-4 sm:grid-cols-3 sm:px-8">
 
@@ -64,6 +67,14 @@
                         <p class="">
                             "Sorry Folks. I'm pullin' up steaks."
                         </p>
+                        <div class="flex justify-center">
+                            <form method="GET" action="/">
+                                <button type="submit"
+                                        class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded transition ease-in-out duration-500">
+                                    New Joke
+                                </button>
+                            </form>
+                        </div>
                     </section>
                     <footer class="-mx-2 bg-zinc-100 text-zinc-600 text-sm mt-4 -mb-2 rounded-b flex-0">
                         <p class="w-full text-right rounded-b hover:text-black px-4 py-2">
@@ -89,6 +100,7 @@
                         </p>
                     </footer>
                 </article>
+
 
             </section>
 

@@ -2,7 +2,7 @@
 
     <article class="flex flex-col gap-8">
         <header class="bg-zinc-700 text-zinc-200 -mx-8 -mt-8 rounded-t p-8 text-2xl font-bold ">
-            <h2 class="text-3xl">YOUR-GIVEN-NAME's Joke DB</h2>
+            <h2 class="text-3xl">Yui's Joke DB</h2>
             <h3 class="text-xl">About Us</h3>
         </header>
 
@@ -15,7 +15,7 @@
                 <section class="border border-2 p-2 text-zinc-500 space-y-2">
                     <header class="-mt-2 -mx-2 mb-4 flex space-x-2 bg-zinc-500 text-zinc-100  items-center">
                         <h4 class="p-2 py-3 text-xl font-medium w-2/3">
-                            YOUR NAME
+                            Yui Migaki
                         </h4>
                         <p class="px-2 text-sm text-right grow">
                             Lead Developer
@@ -29,7 +29,7 @@
                 <section class="border border-2 p-2 text-zinc-500 space-y-2">
                     <header class="-mt-2 -mx-2 mb-4 flex space-x-2 bg-zinc-500 text-zinc-100  items-center">
                         <h4 class="p-2 py-3 text-xl font-medium w-2/3">
-                            LECTURER'S NAME
+                            Adrian Gould
                         </h4>
                         <p class="px-2 text-sm text-right grow">
                             Development Supervisor
