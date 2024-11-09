@@ -13,6 +13,7 @@
                         <a href="{{ route('welcome') }}">
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
                         </a>
+
                     @endauth
                 </div>
 
@@ -40,12 +41,18 @@
                                     :active="request()->routeIs('welcome')">
                             {{ __('Welcome') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('joke')"
+                                    :active="request()->routeIs('joke')">
+                            {{ __('Joke') }}
+                        </x-nav-link>
                     @endauth
 
                 </div>
 
                 <!-- Right Navigation Links -->
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
                     <x-nav-link :href="route('about')"
                                 :active="request()->routeIs('about')">
                         {{ __('About') }}

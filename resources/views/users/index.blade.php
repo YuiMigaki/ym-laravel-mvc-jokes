@@ -76,14 +76,14 @@
                                           class="flex gap-4">
                                         @csrf
                                         @method('DELETE')
-
+                                        @auth
+                                            @if(auth()->user()->id === $user->id)
                                         <x-primary-link-button href="{{ route('users.show', $user) }}"
                                                                class="bg-zinc-800">
                                             <span>Show </span>
                                             <i class="fa-solid fa-eye pr-2 order-first"></i>
                                         </x-primary-link-button>
-                                        @auth
-                                            @if(auth()->user()->id === $user->id)
+
                                         <x-primary-link-button href="{{ route('users.edit', $user) }}"
                                                                class="bg-zinc-800">
                                             <span>Edit </span>

@@ -71,7 +71,11 @@ Route::resource('users', UserController::class)
 
 Route::resource('jokes', JokeController::class)
     ->middleware(['auth', 'verified'])
-    ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+
+Route::resource('jokes', JokeController::class)
+    ->only(['index', 'show']);
+
 
 
 

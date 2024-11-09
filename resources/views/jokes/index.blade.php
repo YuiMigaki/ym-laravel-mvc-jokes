@@ -16,6 +16,7 @@
             <div class="order-first">
                 <i class="fa-solid fa-user min-w-8 text-white"></i>
             </div>
+
             <form method="GET" action="/jokes/search" class="block mx-5">
                 <input type="text" name="keywords" placeholder="User search..."
                        class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
@@ -27,6 +28,7 @@
                     <i class="fa fa-search"></i> Search
                 </x-primary-link-button>
             </form>
+
             <x-primary-link-button href="{{ route('jokes.create') }}"
                                    class="bg-zinc-200 hover:bg-zinc-900 text-zinc-800 hover:text-white">
                 <i class="fa-solid fa-user-plus "></i>
@@ -84,7 +86,7 @@
 
                                         <x-primary-link-button href="{{ route('jokes.show', $joke) }}"
                                                                class="bg-zinc-800">
-                                            <span>Show </span>
+                                            <span>Show</span>
                                             <i class="fa-solid fa-eye pr-2 order-first"></i>
                                         </x-primary-link-button>
                                         @auth
