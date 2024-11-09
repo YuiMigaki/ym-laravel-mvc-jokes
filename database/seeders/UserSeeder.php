@@ -16,35 +16,45 @@ class UserSeeder extends Seeder
         $seedData = [
             [
                 'id'=>100,
-                'name'=>'Ad Ministra',
+                'nickname'=>'Ad Ministra',
+                'given_name'=>'Ad Ministra',
+                'family_name'=>'Ad Ministra',
                 'email'=>'admin@gmail.com',
                 'password'=>'Password1',
                 'email_verified_at'=>now()
             ],
             [
                 'id'=>200,
-                'name'=>'Adrian Gould',
+                'nickname'=>'Adrian',
+                'given_name'=>'Ad Ministra',
+                'family_name'=>'Ad Ministra',
                 'email'=>'adrian@gmail.com',
                 'password'=>'Password1',
                 'email_verified_at'=>now()
             ],
             [
                 'id'=>202,
-                'name'=>'Yui Migaki',
+                'nickname'=>'Yui',
+                'given_name'=>'Ad Ministra',
+            'family_name'=>'Ad Ministra',
                 'email'=>'yui@gmail.com',
                 'password'=>'Password1',
                 'email_verified_at'=>now()
             ],
             [
                 'id'=>1001,
-                'name'=>'Eileen Dover',
+                'nickname'=>'Eileen',
+                'given_name'=>'Ad Ministra',
+                'family_name'=>'Ad Ministra',
                 'email'=>'eileen@gmail.com',
                 'password'=>'Password1',
                 'email_verified_at'=>now()
             ],
             [
                 'id'=>1002,
-                'name'=>'Robyn Banks',
+                'nickname'=>'Robyn',
+                'given_name'=>'Ad Ministra',
+                'family_name'=>'Ad Ministra',
                 'email'=>'robyn@gmail.com',
                 'password'=>'Password1',
                 'email_verified_at'=>now()

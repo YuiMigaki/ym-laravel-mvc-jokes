@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
-            YOUR-GIVEN-NAME's {{ __('Joke DB') }}
+            Yui's {{ __('Joke DB') }}
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
         <header
             class="bg-zinc-700 text-zinc-200 rounded-t-lg -mx-4 -mt-8 p-8 text-2xl font-bold flex flex-row items-center">
             <h2 class="grow">
-                Users (Add')
+                Users (Add)
             </h2>
             <div class="order-first">
                 <i class="fa-solid fa-user min-w-8 text-white"></i>
@@ -49,11 +49,11 @@
                                 class="py-4 px-6 border-b border-neutral-200 bg-white font-medium text-zinc-800 dark:border-white/10">
 
                                 <div class="flex flex-col my-2 mt-2">
-                                    <x-input-label for="name">
+                                    <x-input-label for="nickname">
                                         Nickname
                                     </x-input-label>
-                                    <x-text-input id="name" name="name" value="{{ old('name') }}"/>
-                                    <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+                                    <x-text-input id="nickname" name="nickname" value="{{ old('nickname') ?? old('given_name')  }}" />
+                                    <x-input-error :messages="$errors->get('nickname')" class="mt-2"/>
                                 </div>
 
                                 <div class="flex flex-col my-2">
@@ -85,26 +85,27 @@
                                         Password
                                     </x-input-label>
                                     <x-text-input type="password" id="password" name="password"/>
+                                    <x-input-error :messages="$errors->get('password')" class="mt-2"/>
                                 </div>
 
                                 <div class="flex flex-col my-2">
                                     <x-input-label for="password_confirmation">
                                         Confirm password
                                     </x-input-label>
-                                    <x-text-input id="password_confirmation" name="password_confirmation"/>
-                                    <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+                                    <x-text-input type="password" id="password_confirmation" name="password_confirmation"/>
+                                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
                                 </div>
                             </section>
 
                             <footer
                                 class="flex gap-4 px-6 py-4 border-b border-neutral-200 font-medium text-zinc-800 dark:border-white/10">
 
-                                <x-primary-link-button href="users index" class="bg-zinc-800">
-                                    Cancel
+                                <x-primary-link-button href="{{ route('users.index') }}" class="bg-zinc-800">
+                                    {{ __('Cancel') }}
                                 </x-primary-link-button>
 
                                 <x-primary-button type="submit" class="bg-zinc-800">
-                                    Save
+                                    {{ __('Save') }}
                                 </x-primary-button>
                             </footer>
                         </div>

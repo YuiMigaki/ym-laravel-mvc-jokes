@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 
 class UserController extends Controller
@@ -32,18 +33,32 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'min:1', 'max:255', 'string',],
-//            'given_name' => ['required', 'min:1', 'max:255', 'string',],
-//            'family_name' => ['sometimes', 'nullable', 'max:255', 'string',],
+            'nickname' => ['sometimes', 'nullable', 'max:255', 'string',],
+            'given_name' => ['required', 'min:1', 'max:255', 'string',],
+            'family_name' => ['required', 'min:1', 'max:255', 'string',],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class,],
             'password' => ['required', 'confirmed', 'min:4', 'max:255', Rules\Password::defaults(),],
+            'password_confirmation' => ['required', 'min:4', 'max:255', Rules\Password::defaults(),],
+
         ]);
 
         $user = User::create($validated);
 
+        // Check nickname if provided, otherwise set it to given name
+        $user->nickname = $validated['nickname'] ? : $validated['given_name'];
+
         return redirect(route('users.index'))
             ->with('success', 'User created');
 
+    }
+
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $results = User::where('user', 'like', "%$search%")->get();
+
+        return view('users.index', ['results' => $results]);
     }
 
     /**
@@ -70,7 +85,7 @@ class UserController extends Controller
         $user = User::where('id', '=', $id)->get()->first();
 
         if ($user) {
-            return view('users.update', compact(['user',]))
+            return view('users.edit', compact(['user',]))
                 ->with('success', 'User found');
         }
 
@@ -89,17 +104,21 @@ class UserController extends Controller
         }
 
         $validated = $request->validate([
-            'name' => ['required', 'min:1', 'max:255', 'string',],
-//            'given_name' => ['required', 'min:1', 'max:255', 'string',],
-//            'family_name' => ['sometimes', 'nullable', 'min:1', 'max:255', 'string',],
+            'nickname' => ['sometimes', 'nullable', 'max:255', 'string',],
+            'given_name' => ['required', 'min:1', 'max:255', 'string',],
+            'family_name' => ['required', 'min:1', 'min:1', 'max:255', 'string',],
             'email' => ['required', 'min:5', 'max:255', 'email', Rule::unique(User::class)->ignore($id),],
-            'password' => ['sometimes', 'required', 'min:4', 'max:255', 'string', 'confirmed',],
-            'password_confirmation' => ['sometimes', 'required_with:password', 'min:4', 'max:255', 'string',],
+            'password' => ['required', 'min:4', 'max:255', 'string', 'confirmed', Rules\Password::defaults(),],
+            'password_confirmation' => ['required', 'min:4', 'max:255', 'string',],
         ]);
 
         $user = User::where('id', '=', $id)->get()->first();
 
         $user->fill($validated);
+
+        // Check nickname if provided, otherwise set it to given name
+        $user->nickname = $validated['nickname'] ? : $validated['given_name'];
+
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
