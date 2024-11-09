@@ -68,7 +68,7 @@
                                     <x-input-label for="family_name">
                                         Family Name
                                     </x-input-label>
-                                    <x-text-input id="family_ame" name="family_name" value="{{ old('family_name') }}"/>
+                                    <x-text-input id="family_name" name="family_name" value="{{ old('family_name') }}"/>
                                     <x-input-error :messages="$errors->get('family_name')" class="mt-2"/>
                                 </div>
 

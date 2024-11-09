@@ -62,10 +62,7 @@
                     </header>
                     <section class="flex-grow flex flex-col space-y-3 text-zinc-600">
                         <p class="">
-                            A cowboy butcher decided to relocate his fresh meat shop.
-                        </p>
-                        <p class="">
-                            "Sorry Folks. I'm pullin' up steaks."
+                            {!! nl2br(e($random->content))!!}
                         </p>
                         <div class="flex justify-center">
                             <form method="GET" action="/">
@@ -78,8 +75,7 @@
                     </section>
                     <footer class="-mx-2 bg-zinc-100 text-zinc-600 text-sm mt-4 -mb-2 rounded-b flex-0">
                         <p class="w-full text-right rounded-b hover:text-black px-4 py-2">
-                            Author's Name
-                        </p>
+                            {{ $random->author}}</p>
                     </footer>
                 </article>
 
@@ -96,7 +92,9 @@
                     </section>
                     <footer class="-mx-2 bg-zinc-100 text-zinc-600 text-sm mt-4 -mb-2 rounded-b flex-0">
                         <p class="w-full text-right rounded-b hover:text-black px-4 py-2">
-                            Become a member
+                        <x-nav-link  :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Become a member') }}
+                        </x-nav-link>
                         </p>
                     </footer>
                 </article>

@@ -31,13 +31,9 @@
                                     :active="request()->routeIs('joke')">
                             {{ __('Joke') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('category')"
-                                    :active="request()->routeIs('category')">
-                            {{ __('Category') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('index')"
-                                    :active="request()->routeIs('users')">
-                            {{ __('Users') }}
+                        <x-nav-link :href="route('user')"
+                                    :active="request()->routeIs('user')">
+                            {{ __('User') }}
                         </x-nav-link>
                     @else
                         <x-nav-link :href="route('welcome')"
