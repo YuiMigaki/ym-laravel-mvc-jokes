@@ -67,6 +67,21 @@ class JokeController extends Controller
 
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('keywords');
+        $jokes = Joke::where('title','like', "%$search%")
+            ->orWhere('content', 'like', "%$search%")
+            ->orWhere('category', 'like', "%$search%")
+            ->orWhere('tag', 'like', "%$search%")
+            ->orWhere('author', 'like', "%$search%")
+
+
+            ->paginate(6);
+        return view('jokes.index', compact(['jokes',]));
+
+    }
+
     /**
      * Display the specified resource.
      */
@@ -74,8 +89,17 @@ class JokeController extends Controller
     {
         $joke = Joke::whereId($id)->get()->first();
 
-        return view('jokes.show', compact(['joke',]));
+        if ($joke) {
+            return view('jokes.show', compact(['joke',]))
+                ->with('success', 'Joke found');
+        }
+
+        return redirect(route('jokes.index'))
+            ->with('warning', 'Joke not found');
     }
+
+
+
 
     /**
      * Show the form for editing the specified resource.

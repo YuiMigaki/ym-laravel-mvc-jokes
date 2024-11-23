@@ -63,8 +63,9 @@
                                 <x-primary-link-button href="{{ route('jokes.index', $joke) }}" class="bg-zinc-800">
                                     <span>Back</span>
                                 </x-primary-link-button>
+
                                 @auth
-                                    @if(auth()->user()->id === $joke->user_id) {{--Check if the current authenticated user is same as the joke's user_id--}}
+                                    @if(auth()->user()->id === $joke->user_id || auth()->user()->is_superuser) {{--Check if the current authenticated user is same as the joke's user_id--}}
                                         <x-primary-link-button href="{{ route('jokes.edit', $joke) }}" class="bg-zinc-800">
                                             <span>Edit</span>
                                         </x-primary-link-button>

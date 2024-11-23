@@ -81,6 +81,19 @@
                                 </div>
 
                                 <div class="flex flex-col my-2">
+                                    <x-input-label for="role">
+                                        Role
+                                    </x-input-label>
+
+                                    <select class="form-control multiple" multiple name="roles[]">
+                                        @foreach ($selectedRoles as $role)
+                                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <x-input-error :messages="$errors->get('roles')" class="mt-2"/>
+                                </div>
+
+                                <div class="flex flex-col my-2">
                                     <x-input-label for="password">
                                         Password
                                     </x-input-label>

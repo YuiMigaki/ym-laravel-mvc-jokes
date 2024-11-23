@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\JokeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RolesAndPermissionsController;
+use App\Http\Controllers\StaticController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +12,22 @@ Route::get('/', [\App\Http\Controllers\StaticController::class, 'home'])
 
 Route::get('welcome', [\App\Http\Controllers\StaticController::class, 'home'])
     ->name('welcome');
+
+// Administration Dashboard
+Route::get('/dashboard', [StaticController::class, 'admin'])
+    ->middleware(['auth', 'verified', 'role:Admin|Super-User'])
+    ->name('dashboard');
+
+// Members home page
+Route::group(['prefix' => 'members', 'middleware' => ['auth', 'verified', 'role:Staff|Admin|Super-User']],
+    function () {
+        Route::get('/home', [StaticController::class, 'index'])
+            ->name('members.home');
+    }
+);
+
+
+
 
 // TODO: Add Routes for about and contact
 Route::get('/about', [\App\Http\Controllers\StaticController::class, 'about'])
@@ -36,8 +54,7 @@ Route::get('update', [\App\Http\Controllers\UserController::class, 'update'])
 Route::get('destroy', [\App\Http\Controllers\UserController::class, 'destroy'])
     ->name('destroy');
 
-Route::get('search',  [\App\Http\Controllers\UserController::class, 'search'])
-    ->name('search');
+
 
 
 
@@ -53,41 +70,71 @@ Route::get('update', [\App\Http\Controllers\JokeController::class, 'update'])
     ->name('update');
 Route::get('destroy', [\App\Http\Controllers\JokeController::class, 'destroy'])
     ->name('destroy');
-
-Route::get('search', [\App\Http\Controllers\JokeController::class, 'search'])
+Route::post('search',  [\App\Http\Controllers\JokeController::class, 'search'])
     ->name('search');
 
 
+Route::resource('jokes', JokeController::class)
+    ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'search']);
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
 Route::resource('users', UserController::class)
-    ->middleware(['auth', 'verified'])
-    ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
-
-Route::resource('jokes', JokeController::class)
-    ->middleware(['auth', 'verified'])
-    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
-
-Route::resource('jokes', JokeController::class)
-    ->only(['index', 'show']);
-
+    ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'search']);
 
 
 
 
 Route::middleware('auth')->group(function () {
+
+    Route::post('/user/search',  [\App\Http\Controllers\UserController::class, 'search'])
+        ->name('users.search');
+    Route::post('/joke/search',  [\App\Http\Controllers\JokeController::class, 'search'])
+        ->name('jokes.search');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])
         ->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+
+
+    Route::resource('users', UserController::class)
+        ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+
+    Route::resource('jokes', JokeController::class)
+        ->only(['create','store', 'edit', 'update', 'destroy']);
+
+
+
 });
+
+
+
+// role-assignment screen
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => ['auth', 'verified', 'role:Superuser|Admin|Staff']
+], function () {
+
+    Route::get('/permissions', [RolesAndPermissionsController::class, 'index'])
+        ->name('admin.permissions');
+
+    Route::post('/assign_role', [RolesAndPermissionsController::class, 'store'])
+        ->name('admin.assign-role');
+
+    Route::delete('/revoke_role', [RolesAndPermissionsController::class, 'destroy'])
+        ->name('admin.revoke-role');
+
+
+});
+
 
 
 require __DIR__.'/auth.php';

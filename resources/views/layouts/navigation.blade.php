@@ -5,16 +5,19 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    @auth
+
+
+                @auth
                         <a href="{{ route('dashboard') }}">
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
                         </a>
+
                     @else
                         <a href="{{ route('welcome') }}">
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
                         </a>
+@               @endauth
 
-                    @endauth
                 </div>
 
                 <!-- Left Navigation Links -->
@@ -32,10 +35,18 @@
                                     :active="request()->routeIs('joke')">
                             {{ __('Joke') }}
                         </x-nav-link>
+                        @if(auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Staff'))
                         <x-nav-link :href="route('user')"
                                     :active="request()->routeIs('user')">
                             {{ __('User') }}
                         </x-nav-link>
+                        @endif
+                        @can('role-assign')
+                            <x-nav-link :href="route('admin.permissions')" :active="request()->routeIs('permissions')">
+                                {{ __('Roles') }}
+                            </x-nav-link>
+                        @endcan
+
                     @else
                         <x-nav-link :href="route('welcome')"
                                     :active="request()->routeIs('welcome')">
@@ -45,6 +56,7 @@
                                     :active="request()->routeIs('joke')">
                             {{ __('Joke') }}
                         </x-nav-link>
+
                     @endauth
 
                 </div>
@@ -103,6 +115,8 @@
                         </x-slot>
                     </x-dropdown>
                 @else
+                    <div class="p-5">{{ __('Guest') }}</div>
+                <br>
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Log In') }}
                     </x-nav-link>
@@ -113,16 +127,22 @@
                     @endif
                 @endauth
 
-                    <form method="GET" action="/search" class="block mx-5">
-                        <input type="text" name="keywords" placeholder="Keyword Search..."
-                               class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
-                        <button class="w-full md:w-auto
+                    <form action="{{ route('search')  }}"
+                          method="POST" class="block mx-5">
+                        @csrf
+                        @method("POST")
+
+                        <x-text-input type="text" name="keywords" placeholder="Joke search..." value=""
+                                      class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
+
+                        <x-primary-button type="submit"
+                                          class="w-full md:w-auto
                            bg-sky-500 hover:bg-sky-600
                            text-white
                            px-4 py-2
                            focus:outline-none transition ease-in-out duration-500">
-                            <i class="fa fa-search"></i> Search
-                        </button>
+                            <i class="fa fa-search"></i> {{ __('Search') }}
+                        </x-primary-button>
                     </form>
             </div>
 
@@ -154,9 +174,7 @@
                     {{ __('Welcome') }}
                 </x-responsive-nav-link>
             @endauth
-            <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
-                {{ __('Another Link') }}
-            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                 {{ __('About') }}
             </x-responsive-nav-link>

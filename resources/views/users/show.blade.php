@@ -50,6 +50,12 @@
                                 <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->email }}</p>
                             <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Registration Date</p>
                             <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->created_at }}</p>
+                            <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Role</p>
+                                    @if(!empty($user->getRoleNames()))
+                                        @foreach($user->getRoleNames() as $v)
+                                            <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10 " >{{ $v }}</p>
+                                        @endforeach
+                                    @endif
                         </section>
 
                         <footer class="grid gid-cols-1 px-6 py-4 border-b border-neutral-200 font-medium text-zinc-800 dark:border-white/10">
@@ -64,7 +70,7 @@
                                         <span>Back</span>
                                     </x-primary-link-button>
                                 @auth
-                                    @if(auth()->user()->id === $user->id)
+                                    @if(auth()->user()->id === $user->id || auth()->user()->id === $user->user_id)
                                     <x-primary-link-button href="{{ route('users.edit', $user) }}" class="bg-zinc-800">
                                         <span>Edit</span>
                                     </x-primary-link-button>

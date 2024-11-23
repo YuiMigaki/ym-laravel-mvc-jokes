@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <x-slot name="header">
+<x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
             YUI's {{ __('Joke DB') }}
         </h2>
@@ -17,18 +17,43 @@
                 <i class="fa-solid fa-user min-w-8 text-white"></i>
             </div>
 
-            <form method="GET" action="/jokes/search" class="block mx-5">
-                <input type="text" name="keywords" placeholder="User search..."
-                       class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
-                <x-primary-link-button class="w-full md:w-auto
+            @auth
+            <form action="{{ route('jokes.search')  }}"
+                  method="POST" class="block mx-5">
+                @csrf
+                @method("POST")
+
+                <x-text-input type="text" name="keywords" placeholder="Joke search..." value=""
+                              class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
+
+                <x-primary-button type="submit"
+                                  class="w-full md:w-auto
                            bg-sky-500 hover:bg-sky-600
                            text-white
                            px-4 py-2
                            focus:outline-none transition ease-in-out duration-500">
-                    <i class="fa fa-search"></i> Search
-                </x-primary-link-button>
+                    <i class="fa fa-search"></i> {{ __('Search') }}
+                </x-primary-button>
             </form>
+            @else
+            <form action="{{ route('search')  }}"
+                  method="POST" class="block mx-5">
+                @csrf
+                @method("POST")
 
+                <x-text-input type="text" name="keywords" placeholder="Joke search..." value=""
+                              class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
+
+                <x-primary-button type="submit"
+                                  class="w-full md:w-auto
+                           bg-sky-500 hover:bg-sky-600
+                           text-white
+                           px-4 py-2
+                           focus:outline-none transition ease-in-out duration-500">
+                    <i class="fa fa-search"></i> {{ __('Search') }}
+                </x-primary-button>
+            </form>
+            @endauth
             <x-primary-link-button href="{{ route('jokes.create') }}"
                                    class="bg-zinc-200 hover:bg-zinc-900 text-zinc-800 hover:text-white">
                 <i class="fa-solid fa-user-plus "></i>
@@ -90,12 +115,15 @@
                                             <i class="fa-solid fa-eye pr-2 order-first"></i>
                                         </x-primary-link-button>
                                         @auth
-                                            @if(auth()->user()->id === $joke->user_id) {{--Check if the current authenticated user is same as the joke's user_id--}}
+                                            @if (auth()->user()->id === $joke->user_id || auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Staff') )  {{--Check if the current authenticated user is same as the joke's user_id--}}
                                                 <x-primary-link-button href="{{ route('jokes.edit', $joke) }}"
                                                                        class="bg-zinc-800">
-                                                    <span>Edit </span>
+                                                    <span>Edit</span>
                                                     <i class="fa-solid fa-edit pr-2 order-first"></i>
                                                 </x-primary-link-button>
+                                            @endif
+
+                                            @if (auth()->user()->id === $joke->user_id || auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Staff') )
                                                 <x-secondary-button type="submit"
                                                                     class="bg-zinc-200">
                                                     <span>Delete</span>

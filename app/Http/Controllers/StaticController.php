@@ -10,7 +10,6 @@ class StaticController extends Controller
     public function home()
     {
         $random = Joke::inRandomOrder()->first();  // Reference: https://stackoverflow.com/questions/13917558/laravel-eloquent-or-fluent-random-row
-
         return view('static.home', [
             'random' => $random
         ]);
