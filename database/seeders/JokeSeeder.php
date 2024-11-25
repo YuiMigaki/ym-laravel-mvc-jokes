@@ -1,4 +1,20 @@
 <?php
+/**
+ * Assessment Title: Portfolio Part 3
+ * Cluster:          Cluster - SaaS: Front-End Dev - ICT50220 (Advanced Programming)
+ * Qualification:    ICT50220 Diploma of Information Technology (Back End Web Development)
+ * Name:             Yui Migaki
+ * Student ID:       20098757
+ * Year/Semester:    2024/S2
+ *
+ * YOUR SUMMARY OF PORTFOLIO ACTIVITY
+ * This portfolio is based on a scenario where I am employed as a Junior Web Application Developer at RIoT Systems,
+ * a Perth-based company specializing in IoT, Robotics, and Web Application systems. My task is to implement
+ * a simple web application using PHP and elements of the MVC (Model-View-Controller) development methodology.
+ * The process involves following a predefined set of steps, with opportunities to consult stakeholders or their representatives for guidance.
+ * The ultimate goal is to develop a web application that aligns with the company's expertise in IoT, Robotics, and Web
+ *
+ */
 
 namespace Database\Seeders;
 
@@ -19,9 +35,9 @@ class JokeSeeder extends Seeder
                 "category" => "Animal",
                 "title" => "Charging Rhino",
                 "tag" => "Rhino, Animal",
-                "author" => "John Doe",
+                "role" => "Client",
                 "id" => 1,
-                "user_id" => 0,
+                "user_id" => 1002,
 
 
         ],
@@ -30,55 +46,55 @@ class JokeSeeder extends Seeder
                 "category" => "Lightbulb",
                 "title" => "Actors",
                 "tag" => "Actors, Lightbulb",
-                "author" => "Jane Smith",
+                "role" => "Admin",
                 "id" => 2,
-                "user_id" => 0,
+                "user_id" => 100,
             ],
-//
+
             [
                 "content" => "How many auto mechanics does it take to change a light bulb? \r\n\r\nSix - One to force it with a hammer and five to go out for more bulbs.",
                 "category" => "Lightbulb",
                 "title" => "Mechanics",
                 "tag" => "Mechanics, Lightbulb",
-                "author" => "Joe Brown",
+                "role" => "Superuser",
                 "id" => 3,
-                "user_id" => 0,
+                "user_id" => 200,
             ],
             [
                 "content" => "How do you praise a computer?\r\nSay \"Data Boy\"!",
                 "category" => "Puns",
                 "title" => "Computer",
                 "tag" => "Puns, Computer",
-                "author" => "Alice White",
+                "role" => "Admin",
                 "id" => 4,
-                "user_id" => 0,
+                "user_id" => 202,
             ],
             [
                 "content" => "How many law professors does it take to change a lightbulb?\r\n\r\nHell, you need 250 just to lobby for the research grant.",
                 "category" => "Lightbulb",
                 "title" => "Law Professor",
                 "tag" => "Law, Lightbulb",
-                "author" => "Professor X",
+                "role" => "Client",
                 "id" => 5,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
             [
                 "content" => "Diplomacy: The ability to tell a person\r\n\r\n to go to hell in such a way that they look forward to the trip.",
                 "category" => "Other / Misc",
                 "title" => "Definition of Diplomacy",
                 "tag" => "Diplomacy, Misc",
-                "author" => "Wise Guy",
+                "role" => "Staff",
                 "id" => 6,
-                "user_id" => 0,
+                "user_id" => 1001,
             ],
             [
                 "content" => "Why didn't the skeleton go to the dance?\r\n\r\nBecause it had no body to go with.",
                 "category" => "Other / Misc",
                 "title" => "Lone Bones",
                 "tag" => "Skeleton, Dance",
-                "author" => "Spooky",
+                "role" => "Client",
                 "id" => 7,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -86,9 +102,9 @@ class JokeSeeder extends Seeder
                 "category" => "One Liners",
                 "title" => "All Things",
                 "tag" => "One Liners, Skiing",
-                "author" => "Funny Guy",
+                "role" => "Client",
                 "id" => 8,
-                "user_id" => 0,
+                "user_id" => 1002,
 
             ],
 
@@ -97,9 +113,9 @@ class JokeSeeder extends Seeder
                 "category" => "Knock-Knock",
                 "title" => "Cow",
                 "tag" => "Knock-Knock, Animal",
-                "author" => "Classic Jokes",
+                "role" => "Client",
                 "id" => 9,
-                "user_id" => 0,
+                "user_id" => 1002,
 
             ],
 
@@ -108,9 +124,9 @@ class JokeSeeder extends Seeder
                 "category" => "Animal",
                 "title" => "WOWOLFOL",
                 "tag" => "Animal, Wordplay",
-                "author" => "Joke Master",
+                "role" => "Client",
                 "id" => 10,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -118,9 +134,9 @@ class JokeSeeder extends Seeder
                 "category" => "Puns",
                 "title" => "Great Plains",
                 "tag" => "Puns, Geography",
-                "author" => "Punster",
+                "role" => "Client",
                 "id" => 11,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -128,18 +144,18 @@ class JokeSeeder extends Seeder
                 "category" => "Animal",
                 "title" => "Yum #1",
                 "tag" => "Animal, Food",
-                "author" => "Animal Lover",
+                "role" => "Client",
                 "id" => 12,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
             [
                 "content" => "Q. Why do people wear shamrocks on St. Patrick's day?\r\n\r\nA. Regular Rocks are too heavy!",
                 "category" => "Other / Misc",
                 "title" => "St. Patrick's Day",
                 "tag" => "Holiday, St. Patrick's Day",
-                "author" => "Holiday Joker",
+                "role" => "Client",
                 "id" => 13,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -147,9 +163,9 @@ class JokeSeeder extends Seeder
                 "category" => "Lightbulb",
                 "title" => "Country Singers",
                 "tag" => "Lightbulb, Country",
-                "author" => "Country Humorist",
+                "role" => "Client",
                 "id" => 14,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -157,9 +173,9 @@ class JokeSeeder extends Seeder
                 "category" => "Lightbulb",
                 "title" => "Psychologist Handyman",
                 "tag" => "Lightbulb, Psychology",
-                "author" => "Psych Humorist",
+                "role" => "Client",
                 "id" => 15,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -167,9 +183,9 @@ class JokeSeeder extends Seeder
                 "category" => "Lightbulb",
                 "title" => "Light Bulb",
                 "tag" => "Lightbulb, Surrealism",
-                "author" => "Surrealist Jokes",
+                "role" => "Client",
                 "id" => 16,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -177,27 +193,27 @@ class JokeSeeder extends Seeder
                 "category" => "Lightbulb",
                 "title" => "Actors",
                 "tag" => "Lightbulb, Acting",
-                "author" => "Actor's Joke",
+                "role" => "Client",
                 "id" => 17,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
             [
                 "content" => "How many aerobics instructors does it take to change a lightbulb ? \r\n\r\nFive. Four to do it in perfect synchrony and one to stand there going \"\r\n\r\nTo the left, and to the left, and to the left, and to the left, and take it out, \r\n\r\nand put it down, and pick it up, and put it in, and to the right, \r\n\r\nand to the right, and to the right, and to the right...\"",
                 "category" => "Lightbulb",
                 "title" => "Aerobic Instructors",
                 "tag" => "Lightbulb, Aerobics, Humor",
-                "author" => "Fitness Humorist",
+                "role" => "Client",
                 "id" => 18,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
             [
                 "content" => "How many auto mechanics does it take to change a light bulb? \r\n\r\nSix - One to force it with a hammer and five to go out for more bulbs.",
                 "category" => "Lightbulb",
                 "title" => "Mechanics",
                 "tag" => "Lightbulb, Mechanics",
-                "author" => "Mechanic Humorist",
+                "role" => "Client",
                 "id" => 19,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -205,18 +221,18 @@ class JokeSeeder extends Seeder
                 "category" => "Lightbulb",
                 "title" => "FBI",
                 "tag" => "Lightbulb, FBI",
-                "author" => "Spy Humorist",
+                "role" => "Client",
                 "id" => 20,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
             [
                 "content" => "How many philosophers does it take to change a lightbulb?\r\n\r\n3. One to change it and the other two to argue whether the lightbulb really exists.",
                 "category" => "Lightbulb",
                 "title" => "Philosophers",
                 "tag" => "Lightbulb, Philosophy",
-                "author" => "Philosophical Comedian",
+                "role" => "Client",
                 "id" => 21,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -224,9 +240,9 @@ class JokeSeeder extends Seeder
                 "category" => "Lightbulb",
                 "title" => "How Many Telemarketers...",
                 "tag" => "Lightbulb, Telemarketing",
-                "author" => "Telemarketer Humorist",
+                "role" => "Client",
                 "id" => 22,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -234,9 +250,9 @@ class JokeSeeder extends Seeder
                 "category" => "Lawyer",
                 "title" => "Lawyer vs Dry Cleaner",
                 "tag" => "Lawyer, Humor",
-                "author" => "Legal Humorist",
+                "role" => "Client",
                 "id" => 23,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -244,27 +260,27 @@ class JokeSeeder extends Seeder
                 "category" => "Lightbulb",
                 "title" => "Managers",
                 "tag" => "Lightbulb, Management",
-                "author" => "Corporate Comedian",
+                "role" => "Client",
                 "id" => 24,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
             [
                 "content" => "How many shipping department personnel does it take to change a light bulb?\r\n\r\nWe can change the bulb in seven to ten working days, but if you call before 2 p.m.\r\n\r\n and pay an extra $15, we can get it changed overnight.",
                 "category" => "Lightbulb",
                 "title" => "Shipping Department",
                 "tag" => "Lightbulb, Shipping",
-                "author" => "Shipping Humorist",
+                "role" => "Client",
                 "id" => 25,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
             [
                 "content" => "How many management information services guys does it take to change a light bulb?\r\n\r\nMIS has received your request concerning your hardware problem\r\n\r\n and has assigned you request number 39712.\r\n\r\n  Please use this number for any future reference to the light bulb issue.",
                 "category" => "Lightbulb",
                 "title" => "Information Service",
                 "tag" => "Lightbulb, IT Support",
-                "author" => "IT Humorist",
+                "role" => "Client",
                 "id" => 26,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -272,9 +288,9 @@ class JokeSeeder extends Seeder
                 "category" => "Animal",
                 "title" => "Sick Bird",
                 "tag" => "Animal, Puns",
-                "author" => "Animal Joke Creator",
+                "role" => "Client",
                 "id" => 27,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
 
             [
@@ -282,18 +298,18 @@ class JokeSeeder extends Seeder
                 "category" => "Animal",
                 "title" => "Snake and a Kangaroo",
                 "tag" => "Animal, Puns",
-                "author" => "Animal Punster",
+                "role" => "Client",
                 "id" => 28,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
             [
                 "content" => "What do you get when you cross a kangaroo and a sheep?\r\n\r\n A sweater with pockets",
                 "category" => "Animal",
                 "title" => "Kangaroo and a Sheep",
                 "tag" => "Animal, Puns",
-                "author" => "Pun Master",
+                "role" => "Client",
                 "id" => 29,
-                "user_id" => 0,
+                "user_id" => 1002,
             ],
         ];
 

@@ -1,3 +1,4 @@
+
 @props(['message','icon','type','fgColour','bgColour','fgText','bgText'])
 
 @if ($message)

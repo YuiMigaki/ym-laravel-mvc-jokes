@@ -1,3 +1,4 @@
+
 <!-- Page Footer -->
 <!-- based on https://www.creative-tim.com/twcomponents/component/tailwind-css-footer-1-->
 <footer class="w-full text-zinc-300 bg-zinc-800 body-font text-sm pt-4">

@@ -1,3 +1,4 @@
+
 <x-app-layout>
 
     <x-slot name="header">
@@ -46,8 +47,8 @@
                             <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->category }}</p>
                             <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Tags</p>
                             <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->tag }}</p>
-                            <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Author</p>
-                            <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->author }}</p>
+                            <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Author Role</p>
+                            <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->user ? $joke->user->getRoleNames()->first() : 'Client'  }}</p>
                             <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Registration Date</p>
                             <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->created_at }}</p>
                         </section>
@@ -64,16 +65,14 @@
                                     <span>Back</span>
                                 </x-primary-link-button>
 
-                                @auth
-                                    @if(auth()->user()->id === $joke->user_id || auth()->user()->is_superuser) {{--Check if the current authenticated user is same as the joke's user_id--}}
+
                                         <x-primary-link-button href="{{ route('jokes.edit', $joke) }}" class="bg-zinc-800">
                                             <span>Edit</span>
                                         </x-primary-link-button>
                                         <x-secondary-button type="submit" class="bg-zinc-200">
                                             <span>Delete</span>
                                         </x-secondary-button>
-                                    @endif
-                                @endauth
+
                             </form>
                         </footer>
                     </div>

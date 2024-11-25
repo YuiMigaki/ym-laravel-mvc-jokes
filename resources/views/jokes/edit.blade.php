@@ -1,3 +1,4 @@
+
 <x-app-layout>
 
     <x-slot name="header">
@@ -80,12 +81,14 @@
                                 </div>
 
                                 <div class="flex flex-col my-2">
-                                    <x-input-label for="author">
-                                        Author
+                                    <x-input-label for="role">
+                                        Author Role
                                     </x-input-label>
-                                    <x-text-input id="author" name="author" value="{{ old('author') ?? $joke->author }}"/>
-                                    <x-input-error :messages="$errors->get('author')" class="mt-2"/>
+                                    <x-text-input id="role" name="role" value="{{ $joke->user ? $joke->user->getRoleNames()->first() : 'No User Assigned'  }}"  readonly />
+                                    <x-input-error :messages="$errors->get('role')" class="mt-2"/>
+
                                 </div>
+
                             </section>
 
                             <footer

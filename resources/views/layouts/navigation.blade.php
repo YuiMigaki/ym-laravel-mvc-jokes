@@ -1,3 +1,4 @@
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,6 +36,7 @@
                                     :active="request()->routeIs('joke')">
                             {{ __('Joke') }}
                         </x-nav-link>
+
                         @if(auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Staff'))
                         <x-nav-link :href="route('user')"
                                     :active="request()->routeIs('user')">

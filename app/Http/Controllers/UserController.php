@@ -1,9 +1,28 @@
 <?php
+/**
+ * Assessment Title: Portfolio Part 3
+ * Cluster:          Cluster - SaaS: Front-End Dev - ICT50220 (Advanced Programming)
+ * Qualification:    ICT50220 Diploma of Information Technology (Back End Web Development)
+ * Name:             Yui Migaki
+ * Student ID:       20098757
+ * Year/Semester:    2024/S2
+ *
+ * YOUR SUMMARY OF PORTFOLIO ACTIVITY
+ * This portfolio is based on a scenario where I am employed as a Junior Web Application Developer at RIoT Systems,
+ * a Perth-based company specializing in IoT, Robotics, and Web Application systems. My task is to implement
+ * a simple web application using PHP and elements of the MVC (Model-View-Controller) development methodology.
+ * The process involves following a predefined set of steps, with opportunities to consult stakeholders or their representatives for guidance.
+ * The ultimate goal is to develop a web application that aligns with the company's expertise in IoT, Robotics, and Web
+ *
+ */
 
 namespace App\Http\Controllers;
 
+use App\Models\Joke;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -17,7 +36,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(6);
-        return view('users.index', compact(['users',]));
+        $trashedCount = User::onlyTrashed()->count();
+        return view('users.index', compact(['users','trashedCount']));
     }
 
     /**
@@ -34,7 +54,7 @@ class UserController extends Controller
         $selectedRoles = [];
 
         if ($role === 'Superuser') {
-            $selectedRoles = Role::whereIn('name', ['Superuser', 'Admin', 'Staff', 'Client'])->get();
+            $selectedRoles = Role::whereIn('name', ['Admin', 'Staff', 'Client'])->get();
         }
         elseif ($role === 'Admin') {
             $selectedRoles = Role::whereIn('name', ['Staff', 'Client'])->get();
@@ -112,19 +132,8 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-//    public function edit(string $id)
-//    {
-//        $user = User::where('id', '=', $id)->get()->first();
-//
-//        if ($user) {
-//            return view('users.edit', compact(['user',]))
-//                ->with('success', 'User found');
-//        }
-//
-//        return redirect(route('users.index'))
-//            ->with('error', 'User not found');
-//    }
-    public function edit(User $user):View
+
+    public function edit(User $user):View|RedirectResponse
     {
         /*
          * Pluck is used to get just the "name" field from the Roles
@@ -134,22 +143,44 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
+        $authUser = Auth::user();
 
-        $role = auth()->user()->getRoleNames()->first();
+        $authRole = $authUser->getRoleNames()->first();
+
+
 
         // Initialize selected roles
         $selectedRoles = [];
 
         // Fetch the allowed roles based on the current user's role
-        if ($role === 'Superuser') {
-            $selectedRoles = Role::whereIn('name', ['Superuser', 'Admin', 'Staff', 'Client'])->get();
-        } elseif ($role === 'Admin') {
+        if ($authRole === 'Superuser') {
+            $selectedRoles = Role::whereIn('name', ['Admin', 'Staff', 'Client'])->get();
+        } elseif ($authRole === 'Admin') {
             $selectedRoles = Role::whereIn('name', ['Staff', 'Client'])->get();
-        } elseif ($role === 'Staff') {
+        } elseif ($authRole === 'Staff') {
             $selectedRoles = Role::whereIn('name', ['Client'])->get();
         }
 
-        return view('users.edit', compact('user', 'roles', 'userRole', 'selectedRoles'));
+        if ($authUser->hasRole('Superuser') || $authUser->hasAnyRole('Admin', 'Staff', 'Client')) {
+            if ($user->hasRole('Superuser') && !$authUser->hasRole('Superuser')) {
+                return redirect(route('users.index'))
+                    ->with('warning', 'This belongs to a Superuser');
+            }
+
+            if ($user->hasRole('Admin') && $authRole !== 'Superuser' && $authUser->id !== $user->id) {
+                return redirect(route('users.index'))
+                    ->with('warning', 'This account belongs to an/other admin.');
+            }
+
+            if ($user->hasRole('Staff') && $authRole !== 'Superuser' && $authRole !== 'Admin' && $authUser->id !== $user->id) {
+                return redirect(route('users.index'))
+                    ->with('warning', 'This account belongs to other staff.');
+            }
+
+            return view('users.edit', compact('user', 'roles', 'userRole', 'selectedRoles'));
+        }
+        return redirect(route('users.index'))
+            ->with('warning', 'You are not allowed to edit this user');
     }
 
     /**
@@ -203,15 +234,106 @@ class UserController extends Controller
 
         if (auth()->user()->id !== $user->id) {
 
-            $user->delete();
+            $authUser = Auth::user();
 
+            if ($authUser->hasRole('Superuser') || $authUser->hasAnyRole('Admin', 'Staff', 'Client')) {
+                if ($user->hasRole('Superuser') && !$authUser->hasRole('Superuser')) {
+                    return redirect(route('users.index'))
+                        ->with('warning', 'This belongs to a Superuser');
+                }
+
+                if ($user->hasRole('Admin') && !$authUser->hasRole('Superuser') && $authUser->id !== $user->id) {
+                    return redirect(route('users.index'))
+                        ->with('warning', 'This account belongs to an/other admin.');
+                }
+
+                if ($user->hasRole('Staff') && !$authUser->hasRole('Superuser') && !$authUser->hasRole('Admin') && $authUser->id !== $user->id) {
+                    return redirect(route('users.index'))
+                        ->with('warning', 'This account belongs to other staff.');
+
+                }
+                $user->delete();
+
+                return redirect(route('users.index'))
+                    ->with('success', "User {$user->nickname} deleted");
+            }
             return redirect(route('users.index'))
-                ->with('success', 'User deleted');
-
+                ->with('warning', 'You are not allowed to delete this user');
         }
 
         return back()
             ->with('error', 'Cannot delete yourself');
 
     }
+
+
+    public function trash()
+    {
+        $users = User::onlyTrashed()->paginate(6);
+        return view('users.trash', compact('users'));
+    }
+
+    public function restore(string $id): RedirectResponse
+    {
+        $trashedUser = User::onlyTrashed()->findOrFail($id);
+
+        $user = Auth::user();
+        if ($user->id === $trashedUser->user_id || $user->hasAnyRole('Superuser', 'Admin', 'Staff', 'Client')) {
+            if ($trashedUser->hasRole('Superuser')) {
+                return redirect()->back()->with('warning', "This belongs to a Superuser.");
+
+            }
+
+            if ($trashedUser->hasRole('Admin') && !$user->hasRole('Superuser') && $user->id !== $trashedUser->id) {
+                return redirect()->back()->with('warning', "This belongs to an/other admin.");
+
+            }
+
+            if ($trashedUser->hasRole('Staff') && !$user->hasRole('Superuser') && !$user->hasRole('Admin') && $user->id !== $trashedUser->user_id) {
+                return redirect()->back()->with('warning', "This account belongs to other staff. You cannot restore this account.");
+
+            }
+
+            $trashedUser->restore();
+
+            return redirect()->back()
+                ->with('success', "User {$trashedUser->nickname} successfully restored!");
+        }
+        return redirect()->back()->with('warning', "You are not allow to restore user.");
+
+
+
+
+    }
+    public function remove(string $id): RedirectResponse
+    {
+        $trashedUser = User::onlyTrashed()->findOrFail($id);
+
+        $user = Auth::user();
+        if ($user->id === $trashedUser->user_id || $user->hasAnyRole('Superuser', 'Admin', 'Staff', 'Client')) {
+            if ($trashedUser->hasRole('Superuser')) {
+                return redirect()->back()->with('warning', "This belongs to a Superuser.");
+
+            }
+
+            if ($trashedUser->hasRole('Admin') && !$user->hasRole('Superuser') && $user->id !== $trashedUser->id) {
+                return redirect()->back()->with('warning', "This belongs to an/other admin.");
+            }
+
+            if ($user->hasRole('Staff') && $user->id !== $trashedUser->user_id) {
+                return redirect()->back()->with('warning', "This account belongs to other staff. You cannot restore this account.");
+
+            }
+
+            $trashedUser->forceDelete();
+
+            return redirect()->back()
+                ->with('success', "User {$trashedUser->nickname} permanently deleted!");
+        }
+        return redirect()->back()->with('warning', "You are not allow to remove user.");
+
+
+    }
+
+
 }

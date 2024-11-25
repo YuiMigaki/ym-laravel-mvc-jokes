@@ -1,4 +1,20 @@
 <?php
+/**
+ * Assessment Title: Portfolio Part 3
+ * Cluster:          Cluster - SaaS: Front-End Dev - ICT50220 (Advanced Programming)
+ * Qualification:    ICT50220 Diploma of Information Technology (Back End Web Development)
+ * Name:             Yui Migaki
+ * Student ID:       20098757
+ * Year/Semester:    2024/S2
+ *
+ * YOUR SUMMARY OF PORTFOLIO ACTIVITY
+ * This portfolio is based on a scenario where I am employed as a Junior Web Application Developer at RIoT Systems,
+ * a Perth-based company specializing in IoT, Robotics, and Web Application systems. My task is to implement
+ * a simple web application using PHP and elements of the MVC (Model-View-Controller) development methodology.
+ * The process involves following a predefined set of steps, with opportunities to consult stakeholders or their representatives for guidance.
+ * The ultimate goal is to develop a web application that aligns with the company's expertise in IoT, Robotics, and Web
+ *
+ */
 
 use App\Http\Controllers\JokeController;
 use App\Http\Controllers\ProfileController;
@@ -19,7 +35,7 @@ Route::get('/dashboard', [StaticController::class, 'admin'])
     ->name('dashboard');
 
 // Members home page
-Route::group(['prefix' => 'members', 'middleware' => ['auth', 'verified', 'role:Staff|Admin|Super-User']],
+Route::group(['prefix' => 'members', 'middleware' => ['auth', 'verified', 'role:Staff|Admin|Superuser']],
     function () {
         Route::get('/home', [StaticController::class, 'index'])
             ->name('members.home');
@@ -72,11 +88,39 @@ Route::get('destroy', [\App\Http\Controllers\JokeController::class, 'destroy'])
     ->name('destroy');
 Route::post('search',  [\App\Http\Controllers\JokeController::class, 'search'])
     ->name('search');
+Route::match(['get', 'post'], 'search', [\App\Http\Controllers\JokeController::class, 'search'])
+    ->name('search'); //Make this to handle both GET and POST methods
 
+
+Route::get('jokes/trash', [JokeController::class, 'trash'])
+    ->name('jokes.trash');
+Route::get('jokes/{id}/trash/restore', [JokeController::class, 'restore'])
+    ->name('jokes.trash-restore');
+Route::delete('jokes/{id}/trash/remove', [JokeController::class, 'remove'])
+    ->name('jokes.trash-remove');
+Route::post('jokes/trash/recover', [JokeController::class, 'recoverAll'])
+    ->name('jokes.trash-recover');
+Route::delete('jokes/trash/empty', [JokeController::class, 'empty'])
+    ->name('jokes.trash-empty');
 
 Route::resource('jokes', JokeController::class)
     ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'search']);
 
+
+
+
+
+
+Route::get('users/trash', [UserController::class, 'trash'])
+    ->name('users.trash');
+Route::get('users/{id}/trash/restore', [UserController::class, 'restore'])
+    ->name('users.trash-restore');
+Route::delete('users/{id}/trash/remove', [UserController::class, 'remove'])
+    ->name('users.trash-remove');
+Route::post('users/trash/recover', [UserController::class, 'recoverAll'])
+    ->name('users.trash-recover');
+Route::delete('users/trash/empty', [UserController::class, 'empty'])
+    ->name('users.trash-empty');
 
 Route::resource('users', UserController::class)
     ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'search']);
@@ -86,10 +130,11 @@ Route::resource('users', UserController::class)
 
 Route::middleware('auth')->group(function () {
 
-    Route::post('/user/search',  [\App\Http\Controllers\UserController::class, 'search'])
-        ->name('users.search');
-    Route::post('/joke/search',  [\App\Http\Controllers\JokeController::class, 'search'])
-        ->name('jokes.search');
+    Route::match(['get', 'post'], '/user/search',  [\App\Http\Controllers\UserController::class, 'search'])
+        ->name('users.search');//Make this to handle both GET and POST methods
+    Route::match(['get', 'post'], '/joke/search', [\App\Http\Controllers\JokeController::class, 'search'])
+        ->name('jokes.search');//Make this to handle both GET and POST methods
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])

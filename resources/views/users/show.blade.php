@@ -70,7 +70,7 @@
                                         <span>Back</span>
                                     </x-primary-link-button>
                                 @auth
-                                    @if(auth()->user()->id === $user->id || auth()->user()->id === $user->user_id)
+                                    @if(auth()->user()->id === $user->id || auth()->user()->id === $user->user_id || auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Staff') )
                                     <x-primary-link-button href="{{ route('users.edit', $user) }}" class="bg-zinc-800">
                                         <span>Edit</span>
                                     </x-primary-link-button>

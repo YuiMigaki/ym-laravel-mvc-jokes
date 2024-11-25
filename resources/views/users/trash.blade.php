@@ -11,46 +11,16 @@
         <header
             class="bg-zinc-700 text-zinc-200 rounded-t-lg -mx-4 -mt-8 p-8 text-2xl font-bold flex flex-row items-center">
             <h2 class="grow">
-                Users (List)
+                User Recycle Bin
             </h2>
             <div class="order-first">
                 <i class="fa-solid fa-user min-w-8 text-white"></i>
             </div>
 
-            <form action="{{ route('users.search')  }}"
-            method="POST" class="block mx-5">
-                @csrf
-                @method("POST")
-
-                <x-text-input type="text" name="keywords" placeholder="User search..." value=""
-                       class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
-
-                <x-primary-button type="submit"
-                                       class="w-full md:w-auto
-                           bg-sky-500 hover:bg-sky-600
-                           text-white
-                           px-4 py-2
-                           focus:outline-none transition ease-in-out duration-500">
-                    <i class="fa fa-search"></i> {{ __('Search') }}
-                </x-primary-button>
-            </form>
-
-            <x-primary-link-button href="{{ route('users.create') }}"
+            <x-primary-link-button href="{{ route('users.index') }}"
                                    class="bg-zinc-200 hover:bg-zinc-900 text-zinc-800 hover:text-white">
-                <i class="fa-solid fa-user-plus "></i>
-                <span class="pl-4">Add User</span>
-            </x-primary-link-button>
-
-            <x-primary-link-button href="{{ route('users.trash') }}"
-                                   class="bg-zinc-200 hover:bg-zinc-900 text-zinc-800 hover:text-white ml-4
-                       @if($trashedCount>0)
-                            text-slate-200 hover:text-slate-600 bg-slate-600 hover:bg-slate-500
-                       @else
-                            text-slate-600 hover:text-slate-200 bg-slate-200 hover:bg-slate-500
-                       @endif
-                       duration-300 ease-in-out transition-all space-x-2">
-                <i class="fa fa-trash"></i>
-                {{ $trashedCount ?? 0 }} {{ __('Deleted') }}
+                <i class="fa fa-users-slash "></i>
+                <span class="pl-4">{{ __('Users') }}</span>
             </x-primary-link-button>
 
 
@@ -95,27 +65,23 @@
                                     @endif
                                 </td>
                                 <td class="whitespace-nowrap px-0 py-4">
-                                    <form action="{{ route('users.destroy', $user) }}"
+                                    <form action="{{ route('users.trash-remove', $user) }}"
                                           method="POST"
                                           class="flex gap-4">
                                         @csrf
                                         @method('DELETE')
 
                                         @auth
-                                                <x-primary-link-button href="{{ route('users.show', $user) }}"
+                                                <x-primary-link-button href="{{ route('users.trash-restore', $user) }}"
                                                                        class="bg-zinc-800">
-                                                    <span>Show </span>
+                                                    <span>Restore</span>
                                                     <i class="fa-solid fa-eye pr-2 order-first"></i>
                                                 </x-primary-link-button>
-                                                <x-primary-link-button href="{{ route('users.edit', $user) }}"
-                                                                       class="bg-zinc-800">
-                                                    <span>Edit </span>
-                                                    <i class="fa-solid fa-edit pr-2 order-first"></i>
-                                                </x-primary-link-button>
+
 
                                                 <x-secondary-button type="submit"
                                                                     class="bg-zinc-200">
-                                                    <span>Delete</span>
+                                                    <span>Remove!</span>
                                                     <i class="fa-solid fa-times pr-2 order-first"></i>
                                                 </x-secondary-button>
                                         @endauth
@@ -127,6 +93,7 @@
 
                         <tfoot>
                         <tr class="bg-zinc-100">
+
                             <td colspan="7" class="px-6 py-2">
                                 @if( $users->hasPages() )
                                     {{ $users->links() }}
@@ -135,6 +102,7 @@
                                 @else
                                     <p class="py-2 text-zinc-800 text-sm">All users shown</p>
                                 @endif
+
                             </td>
                         </tr>
                         </tfoot>

@@ -1,3 +1,4 @@
+
 <x-app-layout>
 
     <x-slot name="header">
@@ -80,33 +81,35 @@
                                 </div>
 
                                 <div class="flex flex-col my-2">
-                                    <x-input-label for="author">
-                                        Author
+                                    <x-input-label for="role">
+                                        Author Role
                                     </x-input-label>
-                                    <x-text-input id="author" name="author" value="{{ old('author') }}"/>
-                                    <x-input-error :messages="$errors->get('author')" class="mt-2"/>
+                                    <x-text-input id="role" name="role" value="{{ auth()->user()->getRoleNames()->first() ?? 'Client' }}"  readonly />
+                                    <x-input-error :messages="$errors->get('role')" class="mt-2"/>
                                 </div>
+
+
                             </section>
 
-                            <footer
-                                class="flex gap-4 px-6 py-4 border-b border-neutral-200 font-medium text-zinc-800 dark:border-white/10">
+            <footer
+                class="flex gap-4 px-6 py-4 border-b border-neutral-200 font-medium text-zinc-800 dark:border-white/10">
 
-                                <x-primary-link-button href="{{ route('jokes.index') }}" class="bg-zinc-800">
-                                    {{ __('Cancel') }}
-                                </x-primary-link-button>
+                <x-primary-link-button href="{{ route('jokes.index') }}" class="bg-zinc-800">
+                    {{ __('Cancel') }}
+                </x-primary-link-button>
 
-                                <x-primary-button type="submit" class="bg-zinc-800">
-                                    {{ __('Save') }}
-                                </x-primary-button>
-                            </footer>
-                        </div>
-                    </form>
-
-                </section>
-
-            </section>
-
+                <x-primary-button type="submit" class="bg-zinc-800">
+                    {{ __('Save') }}
+                </x-primary-button>
+            </footer>
         </div>
+    </form>
 
-    </article>
+</section>
+
+</section>
+
+</div>
+
+</article>
 </x-app-layout>

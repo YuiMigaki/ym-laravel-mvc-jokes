@@ -29,7 +29,7 @@
 
                         <section class="w-full md:w-1/3 border shadow rounded
                                         border-neutral-300 ">
-                            <header class="flex-none bg-neutral-600 text-neutral-100 p-2 rounded-t">
+                            <header class="flex-none bg-neutral-800 text-neutral-100 p-2 rounded-t">
                                 <h4 class="text-xl capitalize">{{$role->name}}</h4>
                             </header>
 
