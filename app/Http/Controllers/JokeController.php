@@ -17,7 +17,6 @@
  */
 
 
-
 namespace App\Http\Controllers;
 
 use App\Models\Joke;
@@ -39,7 +38,7 @@ class JokeController extends Controller
         $trashedCount = Joke::onlyTrashed()->count();
 
 
-        return view('jokes.index', compact(['jokes','trashedCount']));
+        return view('jokes.index', compact(['jokes', 'trashedCount']));
     }
 
     /**
@@ -82,13 +81,11 @@ class JokeController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('keywords');
-        $jokes = Joke::where('title','like', "%$search%")
+        $jokes = Joke::where('title', 'like', "%$search%")
             ->orWhere('content', 'like', "%$search%")
             ->orWhere('category', 'like', "%$search%")
             ->orWhere('tag', 'like', "%$search%")
             ->orWhere('role', 'like', "%$search%")
-
-
             ->paginate(6);
         return view('jokes.index', compact(['jokes',]));
 
@@ -109,8 +106,6 @@ class JokeController extends Controller
         return redirect(route('jokes.index'))
             ->with('warning', 'Joke not found');
     }
-
-
 
 
     /**
@@ -137,7 +132,8 @@ class JokeController extends Controller
             return view('jokes.edit', compact(['joke', 'users']));
         }
         return redirect(route('jokes.index'))
-            ->with('warning', 'You are not allowed to edit this joke now. Please ask Admin or Superuser member to assign your role');
+            ->with('warning',
+                'You are not allowed to edit this joke now. Please ask Admin or Superuser member to assign your role');
 
 
     }
@@ -179,7 +175,7 @@ class JokeController extends Controller
                     ->with('warning', 'This belongs to a Superuser');
             }
 
-            if ($joke->user->hasRole('Admin') && !$user->hasRole('Superuser') && $joke->user_id !== $user->id ) {
+            if ($joke->user->hasRole('Admin') && !$user->hasRole('Superuser') && $joke->user_id !== $user->id) {
                 return redirect(route('jokes.index'))
                     ->with('warning', 'This belongs to an/other admin');
             }
@@ -189,7 +185,8 @@ class JokeController extends Controller
                 ->with('success', 'Joke successfully deleted!');
         }
         return redirect(route('jokes.index'))
-            ->with('warning', 'You are not allowed to delete this joke now. Please ask Admin or Superuser member to assign your role');
+            ->with('warning',
+                'You are not allowed to delete this joke now. Please ask Admin or Superuser member to assign your role');
 
 
     }
@@ -214,7 +211,7 @@ class JokeController extends Controller
 
         $user = Auth::user();
 
-        if ($joke->user_id == $user->id || $user->hasAnyRole( 'Superuser', 'Admin', 'Staff', 'Client')) {
+        if ($joke->user_id == $user->id || $user->hasAnyRole('Superuser', 'Admin', 'Staff', 'Client')) {
             if ($user->hasRole('Admin') && $joke->user->hasRole('Superuser')) {
                 $joke->restore();
                 return redirect()->back()->with('success', "Joke {$joke->name} successfully restored .");
@@ -238,6 +235,7 @@ class JokeController extends Controller
         return redirect()->back()->with('warning', "You are not allow to restore this joke.");
 
     }
+
     /**
      * Permanently remove the specified trashed joke from storage.
      */
@@ -246,7 +244,7 @@ class JokeController extends Controller
         $joke = Joke::onlyTrashed()->findOrFail($id);
 
         $user = Auth::user();
-        if ($joke->user_id == $user->id || $user->hasAnyRole( 'Superuser', 'Admin', 'Staff', 'Client')) {
+        if ($joke->user_id == $user->id || $user->hasAnyRole('Superuser', 'Admin', 'Staff', 'Client')) {
             if ($joke->user->hasRole('Superuser') && $joke->user_id !== $user->id) {
                 return redirect()->back()->with('warning', "This belongs to a Superuser.");
 
@@ -262,8 +260,6 @@ class JokeController extends Controller
                 ->with('success', "Joke permanently removed!.");
         }
         return redirect()->back()->with('warning', "You are not allow to remove this joke.");
-
-
 
     }
 

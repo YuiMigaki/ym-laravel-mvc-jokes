@@ -1,4 +1,3 @@
-
 <x-app-layout>
 
     <x-slot name="header">
@@ -52,7 +51,7 @@
                                     <x-input-label for="title">
                                         Title
                                     </x-input-label>
-                                    <x-text-input id="title" name="title" value="{{ old('title')  }}" />
+                                    <x-text-input id="title" name="title" value="{{ old('title')  }}"/>
                                     <x-input-error :messages="$errors->get('title')" class="mt-2"/>
                                 </div>
 
@@ -60,7 +59,8 @@
                                     <x-input-label for="content">
                                         Content
                                     </x-input-label>
-                                    <textarea id="content" name="content" class="block mt-1 w-full">{{ old('content') }}</textarea>
+                                    <textarea id="content" name="content"
+                                              class="block mt-1 w-full">{{ old('content') }}</textarea>
                                     <x-input-error :messages="$errors->get('content')" class="mt-2"/>
                                 </div>
 
@@ -84,32 +84,32 @@
                                     <x-input-label for="role">
                                         Author Role
                                     </x-input-label>
-                                    <x-text-input id="role" name="role" value="{{ auth()->user()->getRoleNames()->first() ?? 'Client' }}"  readonly />
+                                    <x-text-input id="role" name="role"
+                                                  value="{{ auth()->user()->getRoleNames()->first() ?? 'Not assigned a role' }}"
+                                                  readonly/>
                                     <x-input-error :messages="$errors->get('role')" class="mt-2"/>
                                 </div>
-
-
                             </section>
 
-            <footer
-                class="flex gap-4 px-6 py-4 border-b border-neutral-200 font-medium text-zinc-800 dark:border-white/10">
+                            <footer
+                                class="flex gap-4 px-6 py-4 border-b border-neutral-200 font-medium text-zinc-800 dark:border-white/10">
 
-                <x-primary-link-button href="{{ route('jokes.index') }}" class="bg-zinc-800">
-                    {{ __('Cancel') }}
-                </x-primary-link-button>
+                                <x-primary-link-button href="{{ route('jokes.index') }}" class="bg-zinc-800">
+                                    {{ __('Cancel') }}
+                                </x-primary-link-button>
 
-                <x-primary-button type="submit" class="bg-zinc-800">
-                    {{ __('Save') }}
-                </x-primary-button>
-            </footer>
+                                <x-primary-button type="submit" class="bg-zinc-800">
+                                    {{ __('Save') }}
+                                </x-primary-button>
+                            </footer>
+                        </div>
+                    </form>
+
+                </section>
+
+            </section>
+
         </div>
-    </form>
 
-</section>
-
-</section>
-
-</div>
-
-</article>
+    </article>
 </x-app-layout>

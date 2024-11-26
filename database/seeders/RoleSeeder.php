@@ -29,10 +29,10 @@ class RoleSeeder extends Seeder
 {
 
     private $permissions = [
-        'role-assign',    'role-revoke',
-        'role-list',      'role-show',      'role-create',     'role-edit',      'role-delete',
-        'joke-list',   'joke-show',   'joke-create',  'joke-edit',   'joke-delete',
-        'user-list',      'user-show',      'user-create',     'user-edit',      'user-delete',
+        'role-assign', 'role-revoke',
+        'role-list', 'role-show', 'role-create', 'role-edit', 'role-delete',
+        'joke-list', 'joke-show', 'joke-create', 'joke-edit', 'joke-delete',
+        'user-list', 'user-show', 'user-create', 'user-edit', 'user-delete',
         'members',
     ];
 
@@ -52,8 +52,7 @@ class RoleSeeder extends Seeder
         }
 
 
-
-        // Generate the SuperUser Role
+        // Generate the Superuser Role
         $roleSuperUser = Role::create(['name' => 'Superuser']);
         $permissionsAll = Permission::pluck('id', 'id')->all();
         $roleSuperUser->syncPermissions($permissionsAll);
@@ -91,8 +90,6 @@ class RoleSeeder extends Seeder
         $roleClient->givePermissionTo('joke-create');
         $roleClient->givePermissionTo('joke-delete');
         $roleClient->givePermissionTo('members');
-
-
 
     }
 }

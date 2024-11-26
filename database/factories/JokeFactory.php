@@ -33,10 +33,10 @@ class JokeFactory extends Factory
     public function definition(): array
     {
         return [
-            'content'=> fake()->text(),
-            'category'=> fake()->word(),
+            'content' => fake()->text(),
+            'category' => fake()->word(),
             'title' => fake()->word(),
-            'tag'=> fake()->word(),
+            'tag' => fake()->word(),
             'role' => fake()->name(),
         ];
     }

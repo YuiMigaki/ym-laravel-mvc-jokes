@@ -40,7 +40,7 @@ class JokeSeeder extends Seeder
                 "user_id" => 1002,
 
 
-        ],
+            ],
             [
                 "content" => "How many actors does it take to change a light bulb?\r\n\r\nOnly one-they don't like to share the spotlight.",
                 "category" => "Lightbulb",

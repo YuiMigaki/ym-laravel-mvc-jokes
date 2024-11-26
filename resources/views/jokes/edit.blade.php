@@ -1,4 +1,3 @@
-
 <x-app-layout>
 
     <x-slot name="header">
@@ -23,7 +22,6 @@
                 <span class="pl-4">Add Joke</span>
             </x-primary-link-button>
         </header>
-
 
 
         <div class="flex flex-col flex-wrap my-4 mt-8">
@@ -60,7 +58,8 @@
                                     <x-input-label for="content">
                                         Content
                                     </x-input-label>
-                                    <textarea id="content" name="content" class="block mt-1 w-full">{{ old('content') ?? $joke->content  }}</textarea>
+                                    <textarea id="content" name="content"
+                                              class="block mt-1 w-full">{{ old('content') ?? $joke->content  }}</textarea>
                                     <x-input-error :messages="$errors->get('content')" class="mt-2"/>
                                 </div>
 
@@ -68,7 +67,8 @@
                                     <x-input-label for="category">
                                         Category
                                     </x-input-label>
-                                    <x-text-input id="category" name="category" value="{{ old('category') ?? $joke->category }}"/>
+                                    <x-text-input id="category" name="category"
+                                                  value="{{ old('category') ?? $joke->category }}"/>
                                     <x-input-error :messages="$errors->get('category')" class="mt-2"/>
                                 </div>
 
@@ -84,7 +84,9 @@
                                     <x-input-label for="role">
                                         Author Role
                                     </x-input-label>
-                                    <x-text-input id="role" name="role" value="{{ $joke->user ? $joke->user->getRoleNames()->first() : 'No User Assigned'  }}"  readonly />
+                                    <x-text-input id="role" name="role"
+                                                  value="{{ $joke->user ? $joke->user->getRoleNames()->first() : 'No User Assigned'  }}"
+                                                  readonly/>
                                     <x-input-error :messages="$errors->get('role')" class="mt-2"/>
 
                                 </div>

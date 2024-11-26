@@ -52,7 +52,8 @@
                                     <x-input-label for="nickname">
                                         Nickname
                                     </x-input-label>
-                                    <x-text-input id="nickname" name="nickname" value="{{ old('nickname') ?? old('given_name')  }}" />
+                                    <x-text-input id="nickname" name="nickname"
+                                                  value="{{ old('nickname') ?? old('given_name')  }}"/>
                                     <x-input-error :messages="$errors->get('nickname')" class="mt-2"/>
                                 </div>
 
@@ -86,9 +87,9 @@
                                     </x-input-label>
 
                                     <select class="form-control multiple" multiple name="roles[]">
-                                            @foreach ($selectedRoles as $role)
+                                        @foreach ($selectedRoles as $role)
                                             <option value="{{ $role->name }}">{{ $role->name }}</option>
-                                            @endforeach
+                                        @endforeach
                                     </select>
                                     <x-input-error :messages="$errors->get('roles')" class="mt-2"/>
                                 </div>
@@ -105,7 +106,8 @@
                                     <x-input-label for="password_confirmation">
                                         Confirm password
                                     </x-input-label>
-                                    <x-text-input type="password" id="password_confirmation" name="password_confirmation"/>
+                                    <x-text-input type="password" id="password_confirmation"
+                                                  name="password_confirmation"/>
                                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
                                 </div>
                             </section>

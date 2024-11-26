@@ -36,9 +36,6 @@ class StaticController extends Controller
     }
 
 
-
-
-
     // TODO: Repeat for about and contact pages
 
     /**
@@ -48,6 +45,7 @@ class StaticController extends Controller
     {
         return view('static.about');
     }
+
     /**
      * Display contact page.
      */

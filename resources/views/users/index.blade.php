@@ -18,15 +18,15 @@
             </div>
 
             <form action="{{ route('users.search')  }}"
-            method="POST" class="block mx-5">
+                  method="POST" class="block mx-5">
                 @csrf
                 @method("POST")
 
                 <x-text-input type="text" name="keywords" placeholder="User search..." value=""
-                       class="w-full h-1/5 mr-2  md:w-auto px-4 py-2 focus:outline-none text-black"/>
+                              class="w-full h-1/5 mr-2  md:w-auto px-4 py-2 focus:outline-none text-black"/>
 
                 <x-primary-button type="submit"
-                                       class="w-full md:w-auto
+                                  class="w-full md:w-auto
                            bg-sky-500 hover:bg-sky-600
                            text-white
                            px-4 py-2
@@ -52,8 +52,6 @@
                 <i class="fa fa-trash"></i>
                 {{ $trashedCount ?? 0 }}{{ __('Deleted') }}
             </x-primary-link-button>
-
-
         </header>
 
         @auth
@@ -69,40 +67,41 @@
                             <thead
                                 class="w-full border-b border-neutral-200 bg-zinc-800 font-medium text-white dark:border-white/10">
                             <tr>
-                            <th scope="col" class="px-6 py-4">#</th>
-                            <th scope="col" class="px-6 py-4">Nickname</th>
-                            <th scope="col" class="px-6 py-4">eMail</th>
-                            <th scope="col" class="px-6 py-4">Verified and registration date</th>
-                            <th scope="col" class="px-6 py-4">Role</th>
-                            <th scope="col" class="px-6 py-4">Actions</th>
-                        </tr>
-                        </thead>
+                                <th scope="col" class="px-6 py-4">#</th>
+                                <th scope="col" class="px-6 py-4">Nickname</th>
+                                <th scope="col" class="px-6 py-4">eMail</th>
+                                <th scope="col" class="px-6 py-4">Verified and registration date</th>
+                                <th scope="col" class="px-6 py-4">Role</th>
+                                <th scope="col" class="px-6 py-4">Actions</th>
+                            </tr>
+                            </thead>
 
-                        <tbody>
-                        @foreach($users as $user)
-                            <tr class="border-b border-zinc-300 dark:border-white/10">
-                                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $users->firstItem() + $loop->index}}</td>
-                                <td class="whitespace-nowrap px-6 py-4">{{ $user->nickname }}</td>
-                                <td class="whitespace-nowrap px-6 py-4">{{ $user->email }}</td>
-                                <td class="whitespace-nowrap px-6 py-4">{{ $user->created_at  }}</td>
+                            <tbody>
+                            @foreach($users as $user)
+                                <tr class="border-b border-zinc-300 dark:border-white/10">
+                                    <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $users->firstItem() + $loop->index}}</td>
+                                    <td class="whitespace-nowrap px-6 py-4">{{ $user->nickname }}</td>
+                                    <td class="whitespace-nowrap px-6 py-4">{{ $user->email }}</td>
+                                    <td class="whitespace-nowrap px-6 py-4">{{ $user->created_at  }}</td>
 
 
-                                <td class="px-2">
-                                    @if(!empty($user->getRoleNames()))
-                                        @foreach($user->getRoleNames() as $v)
-                                            <label class="text-xs text-white bg-zinc-500 px-3 rounded-full min-w-12 inline-block text-center">{{ $v }}</label>
-                                        @endforeach
-                                    @endif
-                                </td>
-                                <td class="whitespace-nowrap px-0 py-4">
-                                    <form action="{{ route('users.destroy', $user) }}"
-                                          method="POST"
-                                          class="flex gap-4">
-                                        @csrf
-                                        @method('DELETE')
+                                    <td class="px-2">
+                                        @if(!empty($user->getRoleNames()))
+                                            @foreach($user->getRoleNames() as $v)
+                                                <label
+                                                    class="text-xs text-white bg-zinc-500 px-3 rounded-full min-w-12 inline-block text-center">{{ $v }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td class="whitespace-nowrap px-0 py-4">
+                                        <form action="{{ route('users.destroy', $user) }}"
+                                              method="POST"
+                                              class="flex gap-4">
+                                            @csrf
+                                            @method('DELETE')
 
-                                        @auth
-                                            <x-primary-link-button href="{{ route('users.show', $user) }}"
+                                            @auth
+                                                <x-primary-link-button href="{{ route('users.show', $user) }}"
                                                                        class="bg-zinc-800">
                                                     <span>Show </span>
                                                     <i class="fa-solid fa-eye pr-2 order-first"></i>
@@ -118,28 +117,28 @@
                                                     <span>Delete</span>
                                                     <i class="fa-solid fa-times pr-2 order-first"></i>
                                                 </x-secondary-button>
-                                        @endauth
-                                    </form>
+                                            @endauth
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+
+                            <tfoot>
+                            <tr class="bg-zinc-100">
+                                <td colspan="7" class="px-6 py-2">
+                                    @if( $users->hasPages() )
+                                        {{ $users->links() }}
+                                    @elseif( $users->total() === 0 )
+                                        <p class="text-xl">No users found</p>
+                                    @else
+                                        <p class="py-2 text-zinc-800 text-sm">All users shown</p>
+                                    @endif
                                 </td>
                             </tr>
-                        @endforeach
-                        </tbody>
+                            </tfoot>
 
-                        <tfoot>
-                        <tr class="bg-zinc-100">
-                            <td colspan="7" class="px-6 py-2">
-                                @if( $users->hasPages() )
-                                    {{ $users->links() }}
-                                @elseif( $users->total() === 0 )
-                                    <p class="text-xl">No users found</p>
-                                @else
-                                    <p class="py-2 text-zinc-800 text-sm">All users shown</p>
-                                @endif
-                            </td>
-                        </tr>
-                        </tfoot>
-
-                    </table>
+                        </table>
 
                 </section>
 

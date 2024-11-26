@@ -1,4 +1,3 @@
-
 <select name="{{ $fieldname ?? 'member_id' }}"
         class="w-full grow rounded-md {{ !empty($class) ? ' '. $class : '' }}"
         {{ !empty($autofocus) ? 'autofocus' : '' }}

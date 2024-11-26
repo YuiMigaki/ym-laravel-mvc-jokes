@@ -1,4 +1,3 @@
-
 <x-app-layout>
 
     <x-slot name="header">
@@ -40,20 +39,27 @@
                             <p class="col-span-4 px-6 py-4 border-b border-zinc-200 dark:border-white/10">Content</p>
                         </header>
 
-                        <section class="grid grid-cols-6 border-b border-neutral-200 bg-white font-medium text-zinc-800 dark:border-white/10">
-                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Content</p>
+                        <section
+                            class="grid grid-cols-6 border-b border-neutral-200 bg-white font-medium text-zinc-800 dark:border-white/10">
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">
+                                Content</p>
                             <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{!! strip_tags($joke->content, '<b><i><font><u><style>') !!}</p>
-                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Category</p>
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">
+                                Category</p>
                             <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->category }}</p>
-                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Tags</p>
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">
+                                Tags</p>
                             <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->tag }}</p>
-                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Author Role</p>
-                            <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->user ? $joke->user->getRoleNames()->first() : 'Client'  }}</p>
-                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Registration Date</p>
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">
+                                Author Role</p>
+                            <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->user ? $joke->user->getRoleNames()->first() : 'Not assigned a role'  }}</p>
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">
+                                Registration Date</p>
                             <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $joke->created_at }}</p>
                         </section>
 
-                        <footer class="grid gid-cols-1 px-6 py-4 border-b border-neutral-200 font-medium text-zinc-800 dark:border-white/10">
+                        <footer
+                            class="grid gid-cols-1 px-6 py-4 border-b border-neutral-200 font-medium text-zinc-800 dark:border-white/10">
 
                             <form action="{{ route('jokes.destroy', $joke) }}"
                                   method="POST"
@@ -66,12 +72,12 @@
                                 </x-primary-link-button>
 
 
-                                        <x-primary-link-button href="{{ route('jokes.edit', $joke) }}" class="bg-zinc-800">
-                                            <span>Edit</span>
-                                        </x-primary-link-button>
-                                        <x-secondary-button type="submit" class="bg-zinc-200">
-                                            <span>Delete</span>
-                                        </x-secondary-button>
+                                <x-primary-link-button href="{{ route('jokes.edit', $joke) }}" class="bg-zinc-800">
+                                    <span>Edit</span>
+                                </x-primary-link-button>
+                                <x-secondary-button type="submit" class="bg-zinc-200">
+                                    <span>Delete</span>
+                                </x-secondary-button>
 
                             </form>
                         </footer>

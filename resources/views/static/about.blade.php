@@ -65,8 +65,10 @@
 
             <div class="-mx-4 text-md text-semibold p-4 -mt-4 mb-4 rounded-t flex-0">
                 <p>
-                This application is a simple web application using PHP and elements of the MVC development methodology
-                    owned by RIoT Systems (Robotics & Internet of Things), a Perth based educational and development company
+                    This application is a simple web application using PHP and elements of the MVC development
+                    methodology
+                    owned by RIoT Systems (Robotics & Internet of Things), a Perth based educational and development
+                    company
                     who specialise in IoT, Robotics and Web Application systems.
                 </p>
             </div>
@@ -122,7 +124,7 @@
                     References
                 </h4>
                 <p>Data in these references is not certified to contain generally acceptable jokes, puns, and other
-                    content. Please use with discretion. Some jokes  have incorporated with this
+                    content. Please use with discretion. Some jokes have incorporated with this
                     project, but may be removed if content is deemed to be unsuitable.</p>
             </header>
             <dl class="grid grid-cols-5 gap-2 p-4">

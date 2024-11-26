@@ -16,40 +16,38 @@
         <div class="flex flex-col flex-wrap my-4 mt-8">
 
             @auth
-            <section class="grid grid-cols-1 gap-4 px-4 mt-4 sm:grid-cols-3 sm:px-8">
+                <section class="grid grid-cols-1 gap-4 px-4 mt-4 sm:grid-cols-3 sm:px-8">
 
-                <section class="rounded flex items-center bg-lime-200 border border-lime-600 overflow-hidden">
-                    <div class="rounded-l p-6 bg-lime-600 text-center">
-                        <i class="fa-solid fa-users text-5xl min-w-24 text-white"></i>
-                    </div>
-                    <div class="rounded-r px-6 text-lime-800">
-                        <h3 class="tracking-wider">Total Members</h3>
-                        <p class="text-3xl">12,768</p>
-                    </div>
+                    <section class="rounded flex items-center bg-lime-200 border border-lime-600 overflow-hidden">
+                        <div class="rounded-l p-6 bg-lime-600 text-center">
+                            <i class="fa-solid fa-users text-5xl min-w-24 text-white"></i>
+                        </div>
+                        <div class="rounded-r px-6 text-lime-800">
+                            <h3 class="tracking-wider">Total Members</h3>
+                            <p class="text-3xl">12,768</p>
+                        </div>
+                    </section>
+
+                    <section class="flex items-center bg-amber-200 border border-amber-600 rounded overflow-hidden">
+                        <div class="rounded-l p-6 bg-amber-600 text-center">
+                            <i class="fa-solid fa-table-list text-5xl min-w-24 text-white"></i>
+                        </div>
+                        <div class="rounded-r px-6 text-amber-700">
+                            <h3 class="tracking-wider">Total Categories</h3>
+                            <p class="text-3xl">39,265</p>
+                        </div>
+                    </section>
+
+                    <section class="flex items-center bg-indigo-200 border border-indigo-600 rounded overflow-hidden">
+                        <div class="rounded-l p-6 bg-indigo-600 text-center">
+                            <i class="fa-solid fa-comments text-5xl min-w-24 text-white"></i>
+                        </div>
+                        <div class="rounded-r px-6 text-indigo-700">
+                            <h3 class="tracking-wider">Total Jokes</h3>
+                            <p class="text-3xl">142,334</p>
+                        </div>
+                    </section>
                 </section>
-
-                <section class="flex items-center bg-amber-200 border border-amber-600 rounded overflow-hidden">
-                    <div class="rounded-l p-6 bg-amber-600 text-center">
-                        <i class="fa-solid fa-table-list text-5xl min-w-24 text-white"></i>
-                    </div>
-                    <div class="rounded-r px-6 text-amber-700">
-                        <h3 class="tracking-wider">Total Categories</h3>
-                        <p class="text-3xl">39,265</p>
-                    </div>
-                </section>
-
-                <section class="flex items-center bg-indigo-200 border border-indigo-600 rounded overflow-hidden">
-                    <div class="rounded-l p-6 bg-indigo-600 text-center">
-                        <i class="fa-solid fa-comments text-5xl min-w-24 text-white"></i>
-                    </div>
-                    <div class="rounded-r px-6 text-indigo-700">
-                        <h3 class="tracking-wider">Total Jokes</h3>
-                        <p class="text-3xl">142,334</p>
-                    </div>
-                </section>
-
-
-            </section>
             @endauth
 
             <section class="grid grid-cols-1 gap-4 px-4 mt-4 sm:grid-cols-3 sm:px-8">
@@ -62,7 +60,7 @@
                     </header>
                     <section class="flex-grow flex flex-col space-y-3 text-zinc-600">
                         <p class="">
-                            {!! nl2br(e($random->content))!!}
+                            {!! nl2br(strip_tags($random->content, '<b><i><font><u><style>')) !!}
                         </p>
                         <div class="flex justify-center">
                             <form method="GET" action="/">
@@ -92,16 +90,14 @@
                     </section>
                     <footer class="-mx-2 bg-zinc-100 text-zinc-600 text-sm mt-4 -mb-2 rounded-b flex-0">
                         <p class="w-full text-right rounded-b hover:text-black px-4 py-2">
-                        <x-nav-link  :href="route('register')" :active="request()->routeIs('register')">
-                            {{ __('Become a member') }}
-                        </x-nav-link>
+                            <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                                {{ __('Become a member') }}
+                            </x-nav-link>
                         </p>
                     </footer>
                 </article>
 
-
             </section>
-
 
         </div>
 

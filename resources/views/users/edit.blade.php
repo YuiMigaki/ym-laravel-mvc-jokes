@@ -54,7 +54,8 @@
                                     <x-input-label for="nickname">
                                         Nickname
                                     </x-input-label>
-                                    <x-text-input id="nickname" name="nickname" value="{{ old('nickname') ?? $user->nickname ?? $user->given_name  }}"/>
+                                    <x-text-input id="nickname" name="nickname"
+                                                  value="{{ old('nickname') ?? $user->nickname ?? $user->given_name  }}"/>
                                     <x-input-error :messages="$errors->get('nickname')" class="mt-2"/>
                                 </div>
 
@@ -62,7 +63,8 @@
                                     <x-input-label for="given_name">
                                         Given Name
                                     </x-input-label>
-                                    <x-text-input id="given_name" name="given_name" value="{{ old('given_name') ?? $user->given_name }}"/>
+                                    <x-text-input id="given_name" name="given_name"
+                                                  value="{{ old('given_name') ?? $user->given_name }}"/>
                                     <x-input-error :messages="$errors->get('given_name')" class="mt-2"/>
                                 </div>
 
@@ -70,7 +72,8 @@
                                     <x-input-label for="family_name">
                                         Family Name
                                     </x-input-label>
-                                    <x-text-input id="family_name" name="family_name" value="{{ old('family_name') ?? $user->family_name }}"/>
+                                    <x-text-input id="family_name" name="family_name"
+                                                  value="{{ old('family_name') ?? $user->family_name }}"/>
                                     <x-input-error :messages="$errors->get('family__name')" class="mt-2"/>
                                 </div>
 
@@ -107,7 +110,8 @@
                                     <x-input-label for="password_confirmation">
                                         Confirm password
                                     </x-input-label>
-                                    <x-text-input type="password" id="password_confirmation" name="password_confirmation"/>
+                                    <x-text-input type="password" id="password_confirmation"
+                                                  name="password_confirmation"/>
                                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
                                 </div>
                             </section>

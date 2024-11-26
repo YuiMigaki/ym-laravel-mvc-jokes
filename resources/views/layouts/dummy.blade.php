@@ -1,4 +1,3 @@
-
 <div class="
     text-white bg-red-600 text-red-900 bg-red-100
     bg-amber-600 text-amber-900 bg-amber-100

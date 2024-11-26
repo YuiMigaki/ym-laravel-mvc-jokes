@@ -1,4 +1,3 @@
-
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -8,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
 
 
-                @auth
+                    @auth
                         <a href="{{ route('dashboard') }}">
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
                         </a>
@@ -17,7 +16,7 @@
                         <a href="{{ route('home') }}">
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
                         </a>
-               @endauth
+                    @endauth
 
                 </div>
 
@@ -38,10 +37,10 @@
                         </x-nav-link>
 
                         @if(auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Staff'))
-                        <x-nav-link :href="route('user')"
-                                    :active="request()->routeIs('user')">
-                            {{ __('User') }}
-                        </x-nav-link>
+                            <x-nav-link :href="route('user')"
+                                        :active="request()->routeIs('user')">
+                                {{ __('User') }}
+                            </x-nav-link>
                         @endif
                         @can('role-assign')
                             <x-nav-link :href="route('admin.permissions')" :active="request()->routeIs('permissions')">
@@ -118,7 +117,7 @@
                     </x-dropdown>
                 @else
                     <div class="p-5">{{ __('Guest') }}</div>
-                <br>
+                    <br>
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Log In') }}
                     </x-nav-link>
@@ -129,23 +128,23 @@
                     @endif
                 @endauth
 
-                    <form action="{{ route('search')  }}"
-                          method="POST" class="block mx-5">
-                        @csrf
-                        @method("POST")
+                <form action="{{ route('search')  }}"
+                      method="POST" class="block mx-5">
+                    @csrf
+                    @method("POST")
 
-                        <x-text-input type="text" name="keywords" placeholder="Joke search..." value=""
-                                      class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
+                    <x-text-input type="text" name="keywords" placeholder="Joke search..." value=""
+                                  class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
 
-                        <x-primary-button type="submit"
-                                          class="w-full md:w-auto
+                    <x-primary-button type="submit"
+                                      class="w-full md:w-auto
                            bg-sky-500 hover:bg-sky-600
                            text-white
                            px-4 py-2
                            focus:outline-none transition ease-in-out duration-500">
-                            <i class="fa fa-search"></i> {{ __('Search') }}
-                        </x-primary-button>
-                    </form>
+                        <i class="fa fa-search"></i> {{ __('Search') }}
+                    </x-primary-button>
+                </form>
             </div>
 
             <!-- Hamburger -->
@@ -177,38 +176,38 @@
                 </x-responsive-nav-link>
             @endauth
 
-                @auth
+            @auth
 
-                    <x-responsive-nav-link :href="route('home')"
-                                :active="request()->routeIs('home')">
-                        {{ __('Home') }}
+                <x-responsive-nav-link :href="route('home')"
+                                       :active="request()->routeIs('home')">
+                    {{ __('Home') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('joke')"
+                                       :active="request()->routeIs('joke')">
+                    {{ __('Joke') }}
+                </x-responsive-nav-link>
+
+                @if(auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Staff'))
+                    <x-responsive-nav-link :href="route('user')"
+                                           :active="request()->routeIs('user')">
+                        {{ __('User') }}
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('joke')"
-                                :active="request()->routeIs('joke')">
-                        {{ __('Joke') }}
+                @endif
+                @can('role-assign')
+                    <x-responsive-nav-link :href="route('admin.permissions')"
+                                           :active="request()->routeIs('permissions')">
+                        {{ __('Roles') }}
                     </x-responsive-nav-link>
+                @endcan
 
-                    @if(auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Staff'))
-                        <x-responsive-nav-link :href="route('user')"
-                                    :active="request()->routeIs('user')">
-                            {{ __('User') }}
-                        </x-responsive-nav-link>
-                    @endif
-                    @can('role-assign')
-                        <x-responsive-nav-link :href="route('admin.permissions')" :active="request()->routeIs('permissions')">
-                            {{ __('Roles') }}
-                        </x-responsive-nav-link>
-                    @endcan
+            @else
 
-                @else
+                <x-responsive-nav-link :href="route('joke')"
+                                       :active="request()->routeIs('joke')">
+                    {{ __('Joke') }}
+                </x-responsive-nav-link>
 
-                    <x-responsive-nav-link :href="route('joke')"
-                                :active="request()->routeIs('joke')">
-                        {{ __('Joke') }}
-                    </x-responsive-nav-link>
-
-
-                @endauth
+            @endauth
             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                 {{ __('About') }}
             </x-responsive-nav-link>

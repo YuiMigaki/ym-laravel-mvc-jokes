@@ -56,9 +56,6 @@ Route::get('destroy', [\App\Http\Controllers\UserController::class, 'destroy'])
     ->name('destroy');
 
 
-
-
-
 Route::get('index', [\App\Http\Controllers\JokeController::class, 'index'])
     ->name('index');
 Route::get('create', [\App\Http\Controllers\JokeController::class, 'create'])
@@ -71,7 +68,7 @@ Route::get('update', [\App\Http\Controllers\JokeController::class, 'update'])
     ->name('update');
 Route::get('destroy', [\App\Http\Controllers\JokeController::class, 'destroy'])
     ->name('destroy');
-Route::post('search',  [\App\Http\Controllers\JokeController::class, 'search'])
+Route::post('search', [\App\Http\Controllers\JokeController::class, 'search'])
     ->name('search');
 Route::match(['get', 'post'], 'search', [\App\Http\Controllers\JokeController::class, 'search'])
     ->name('search'); //Make this to handle both GET and POST methods
@@ -92,10 +89,6 @@ Route::resource('jokes', JokeController::class)
     ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'search']);
 
 
-
-
-
-
 Route::get('users/trash', [UserController::class, 'trash'])
     ->name('users.trash');
 Route::get('users/{id}/trash/restore', [UserController::class, 'restore'])
@@ -111,15 +104,12 @@ Route::resource('users', UserController::class)
     ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'search']);
 
 
-
-
 Route::middleware('auth')->group(function () {
 
-    Route::match(['get', 'post'], '/user/search',  [\App\Http\Controllers\UserController::class, 'search'])
+    Route::match(['get', 'post'], '/user/search', [\App\Http\Controllers\UserController::class, 'search'])
         ->name('users.search');//Make this to handle both GET and POST methods
     Route::match(['get', 'post'], '/joke/search', [\App\Http\Controllers\JokeController::class, 'search'])
         ->name('jokes.search');//Make this to handle both GET and POST methods
-
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])
@@ -134,17 +124,13 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
 
-
     Route::resource('users', UserController::class)
         ->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
 
     Route::resource('jokes', JokeController::class)
-        ->only(['create','store', 'edit', 'update', 'destroy']);
-
-
+        ->only(['create', 'store', 'edit', 'update', 'destroy']);
 
 });
-
 
 
 // role-assignment screen
@@ -164,7 +150,6 @@ Route::group([
 
 
 });
-
 
 
 require __DIR__.'/auth.php';

@@ -37,7 +37,7 @@ class UserController extends Controller
     {
         $users = User::paginate(6);
         $trashedCount = User::onlyTrashed()->count();
-        return view('users.index', compact(['users','trashedCount']));
+        return view('users.index', compact(['users', 'trashedCount']));
     }
 
     /**
@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all(); //Added
+        $roles = Role::pluck('name', 'name')->all();
 
         //Get the current role
         $user = auth()->user();
@@ -55,15 +55,13 @@ class UserController extends Controller
 
         if ($role === 'Superuser') {
             $selectedRoles = Role::whereIn('name', ['Admin', 'Staff', 'Client'])->get();
-        }
-        elseif ($role === 'Admin') {
+        } elseif ($role === 'Admin') {
             $selectedRoles = Role::whereIn('name', ['Staff', 'Client'])->get();
-        }
-        elseif ($role === 'Staff') {
+        } elseif ($role === 'Staff') {
             $selectedRoles = Role::whereIn('name', ['Client'])->get();
         }
 
-        return view('users.create',compact('roles', 'selectedRoles'));
+        return view('users.create', compact('roles', 'selectedRoles'));
 
     }
 
@@ -77,7 +75,7 @@ class UserController extends Controller
             'given_name' => ['required', 'min:1', 'max:255', 'string',],
             'family_name' => ['required', 'min:1', 'max:255', 'string',],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class,],
-            'roles' => ['required'], //Added
+            'roles' => ['required'],
             'password' => ['required', 'confirmed', 'min:4', 'max:255', Rules\Password::defaults(),],
             'password_confirmation' => ['required', 'min:4', 'max:255', Rules\Password::defaults(),],
 
@@ -86,11 +84,11 @@ class UserController extends Controller
         $validated['user_id'] = auth()->id(); //This is using auth() helper function to access the current authenticated user and new key 'user_id' is added to the validated array.
 
         $user = User::create($validated);
-        $user->assignRole($validated['roles']); //Add
+        $user->assignRole($validated['roles']);
 
 
         // Check nickname if provided, otherwise set it to given name
-        $user->nickname = $validated['nickname'] ? : $validated['given_name'];
+        $user->nickname = $validated['nickname'] ?: $validated['given_name'];
 
         return redirect(route('users.index'))
             ->with('success', 'User created');
@@ -153,13 +151,11 @@ class UserController extends Controller
     }
 
 
-
-
     /**
      * Show the form for editing the specified resource.
      */
 
-    public function edit(User $user):View|RedirectResponse
+    public function edit(User $user): View|RedirectResponse
     {
         /*
          * Pluck is used to get just the "name" field from the Roles
@@ -172,7 +168,6 @@ class UserController extends Controller
         $authUser = Auth::user();
 
         $authRole = $authUser->getRoleNames()->first();
-
 
 
         // Initialize selected roles
@@ -223,7 +218,7 @@ class UserController extends Controller
             'nickname' => ['sometimes', 'nullable', 'max:255', 'string',],
             'given_name' => ['required', 'min:1', 'max:255', 'string',],
             'family_name' => ['required', 'min:1', 'min:1', 'max:255', 'string',],
-            'roles' => ['required'], //Added
+            'roles' => ['required'],
             'email' => ['required', 'min:5', 'max:255', 'email', Rule::unique(User::class)->ignore($id),],
             'password' => ['required', 'min:4', 'max:255', 'string', 'confirmed', Rules\Password::defaults(),],
             'password_confirmation' => ['required', 'min:4', 'max:255', 'string',],
@@ -238,7 +233,7 @@ class UserController extends Controller
 
 
         // Check nickname if provided, otherwise set it to given name
-        $user->nickname = $validated['nickname'] ? : $validated['given_name'];
+        $user->nickname = $validated['nickname'] ?: $validated['given_name'];
 
 
         if ($user->isDirty('email')) {
@@ -323,7 +318,8 @@ class UserController extends Controller
             }
 
             if ($trashedUser->hasRole('Staff') && !$user->hasRole('Superuser') && !$user->hasRole('Admin') && $user->id !== $trashedUser->user_id) {
-                return redirect()->back()->with('warning', "This account belongs to other staff. You cannot restore this account.");
+                return redirect()->back()->with('warning',
+                    "This account belongs to other staff. You cannot restore this account.");
 
             }
 
@@ -355,7 +351,8 @@ class UserController extends Controller
             }
 
             if ($user->hasRole('Staff') && $user->id !== $trashedUser->user_id) {
-                return redirect()->back()->with('warning', "This account belongs to other staff. You cannot restore this account.");
+                return redirect()->back()->with('warning',
+                    "This account belongs to other staff. You cannot restore this account.");
 
             }
 

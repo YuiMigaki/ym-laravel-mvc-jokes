@@ -22,8 +22,6 @@
                 <i class="fa fa-users-slash "></i>
                 <span class="pl-4">{{ __('Users') }}</span>
             </x-primary-link-button>
-
-
         </header>
 
         @auth
@@ -55,12 +53,11 @@
                                 <td class="whitespace-nowrap px-6 py-4">{{ $user->nickname }}</td>
                                 <td class="whitespace-nowrap px-6 py-4">{{ $user->email }}</td>
                                 <td class="whitespace-nowrap px-6 py-4">{{ $user->created_at  }}</td>
-
-
                                 <td class="px-2">
                                     @if(!empty($user->getRoleNames()))
                                         @foreach($user->getRoleNames() as $v)
-                                            <label class="text-xs text-white bg-zinc-500 px-3 rounded-full min-w-12 inline-block text-center">{{ $v }}</label>
+                                            <label
+                                                class="text-xs text-white bg-zinc-500 px-3 rounded-full min-w-12 inline-block text-center">{{ $v }}</label>
                                         @endforeach
                                     @endif
                                 </td>
@@ -72,18 +69,18 @@
                                         @method('DELETE')
 
                                         @auth
-                                                <x-primary-link-button href="{{ route('users.trash-restore', $user) }}"
-                                                                       class="bg-zinc-800">
-                                                    <span>Restore</span>
-                                                    <i class="fa-solid fa-eye pr-2 order-first"></i>
-                                                </x-primary-link-button>
+                                            <x-primary-link-button href="{{ route('users.trash-restore', $user) }}"
+                                                                   class="bg-zinc-800">
+                                                <span>Restore</span>
+                                                <i class="fa-solid fa-eye pr-2 order-first"></i>
+                                            </x-primary-link-button>
 
 
-                                                <x-secondary-button type="submit"
-                                                                    class="bg-zinc-200">
-                                                    <span>Remove!</span>
-                                                    <i class="fa-solid fa-times pr-2 order-first"></i>
-                                                </x-secondary-button>
+                                            <x-secondary-button type="submit"
+                                                                class="bg-zinc-200">
+                                                <span>Remove!</span>
+                                                <i class="fa-solid fa-times pr-2 order-first"></i>
+                                            </x-secondary-button>
                                         @endauth
                                     </form>
                                 </td>

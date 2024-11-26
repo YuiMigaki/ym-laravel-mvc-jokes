@@ -55,6 +55,7 @@ class Joke extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     /**
      * Define a many-to-many relationship to roles.
      */
