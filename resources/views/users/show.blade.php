@@ -35,25 +35,25 @@
                     <div class="min-w-full text-left text-sm font-light text-surface dark:text-white">
                         <header
                             class="grid grid-cols-6 border-b border-neutral-200 bg-zinc-800 font-medium text-white dark:border-white/10">
-                            <p class="col-span-1 px-6 py-4 border-b border-zinc-200 dark:border-white/10">Item</p>
-                            <p class="col-span-5 px-6 py-4 border-b border-zinc-200 dark:border-white/10">Content</p>
+                            <p class="col-span-2 px-6 py-4 border-b border-zinc-200 dark:border-white/10">Item</p>
+                            <p class="col-span-4 px-6 py-4 border-b border-zinc-200 dark:border-white/10">Content</p>
                         </header>
 
                         <section class="grid grid-cols-6 border-b border-neutral-200 bg-white font-medium text-zinc-800 dark:border-white/10">
-                                <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Nickname</p>
-                                <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->nickname }}</p>
-                            <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Given Name</p>
-                            <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->given_name }}</p>
-                            <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Family Name</p>
-                            <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->family_name }}</p>
-                                <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Email</p>
-                                <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->email }}</p>
-                            <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Registration Date</p>
-                            <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->created_at }}</p>
-                            <p class="col-span-1 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Role</p>
+                                <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Nickname</p>
+                                <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->nickname }}</p>
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Given Name</p>
+                            <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->given_name }}</p>
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Family Name</p>
+                            <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->family_name }}</p>
+                                <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Email</p>
+                                <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->email }}</p>
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Registration Date</p>
+                            <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">{{ $user->created_at }}</p>
+                            <p class="col-span-2 bg-zinc-300 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10">Role</p>
                                     @if(!empty($user->getRoleNames()))
                                         @foreach($user->getRoleNames() as $v)
-                                            <p class="col-span-5 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10 " >{{ $v }}</p>
+                                            <p class="col-span-4 whitespace-nowrap px-6 py-4 border-b border-zinc-200 dark:border-white/10 " >{{ $v }}</p>
                                         @endforeach
                                     @endif
                         </section>

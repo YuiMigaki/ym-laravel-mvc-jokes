@@ -24,6 +24,9 @@ use Illuminate\Http\Request;
 
 class StaticController extends Controller
 {
+    /**
+     * Display home page.
+     */
     public function home()
     {
         $random = Joke::inRandomOrder()->first();  // Reference: https://stackoverflow.com/questions/13917558/laravel-eloquent-or-fluent-random-row
@@ -38,10 +41,16 @@ class StaticController extends Controller
 
     // TODO: Repeat for about and contact pages
 
+    /**
+     * Display about page.
+     */
     public function about()
     {
         return view('static.about');
     }
+    /**
+     * Display contact page.
+     */
     public function contact()
     {
         return view('static.contact');

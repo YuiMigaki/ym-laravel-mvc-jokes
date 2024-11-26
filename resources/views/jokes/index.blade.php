@@ -24,7 +24,7 @@
                 @csrf
 
                 <x-text-input type="text" name="keywords" placeholder="Joke search..." value=""
-                              class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
+                              class="w-full h-1/5 mr-2  md:w-auto px-4 py-2 focus:outline-none text-black"/>
 
                 <x-primary-button type="submit"
                                   class="w-full md:w-auto
@@ -41,7 +41,7 @@
                 @csrf
 
                 <x-text-input type="text" name="keywords" placeholder="Joke search..." value=""
-                              class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
+                              class="w-full h-1/5 mr-2  md:w-auto px-4 py-2 focus:outline-none text-black"/>
 
                 <x-primary-button type="submit"
                                   class="w-full md:w-auto
@@ -71,7 +71,7 @@
                            @endif
                            duration-300 ease-in-out transition-all space-x-2">
                     <i class="fa fa-trash"></i>
-                    {{ $trashedCount ?? 0 }} {{ __('Deleted') }}
+                    {{ $trashedCount ?? 0 }}{{ __('Deleted') }}
                 </x-primary-link-button>
             @endauth
         </header>
@@ -106,7 +106,7 @@
                             <tr class="border-b border-zinc-300 dark:border-white/10">
                                 <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $jokes->firstItem() + $loop->index }}</td>{{--Reference: https://stackoverflow.com/questions/45400398/laravel-use-loop-iteration-with-pagination--}}
                                 <td class="whitespace-nowrap px-6 py-4">{{ $joke->title  }}</td>
-                                <td class="whitespace-nowrap px-6 py-4">{!! nl2br(e($joke->content))!!}</td>{{--reference: https://laracasts.com/discuss/channels/laravel/is-it-safe-to-use-nl2bre-in-blade--}}
+                                <td class="whitespace-nowrap px-6 py-4">    {!! nl2br(strip_tags($joke->content, '<b><i><font><u><style>')) !!}</td>{{--reference: https://laracasts.com/discuss/channels/laravel/is-it-safe-to-use-nl2bre-in-blade--}}
                                 <td class="whitespace-nowrap px-6 py-4">{{ $joke->category }}</td>
 
                                 <td class="whitespace-nowrap px-6 py-4">

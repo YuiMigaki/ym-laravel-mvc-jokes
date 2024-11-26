@@ -24,25 +24,10 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\StaticController::class, 'home'])
-    ->name('static.home');
+    ->name('home');
 
-Route::get('welcome', [\App\Http\Controllers\StaticController::class, 'home'])
-    ->name('welcome');
-
-// Administration Dashboard
-Route::get('/dashboard', [StaticController::class, 'admin'])
-    ->middleware(['auth', 'verified', 'role:Admin|Super-User'])
-    ->name('dashboard');
-
-// Members home page
-Route::group(['prefix' => 'members', 'middleware' => ['auth', 'verified', 'role:Staff|Admin|Superuser']],
-    function () {
-        Route::get('/home', [StaticController::class, 'index'])
-            ->name('members.home');
-    }
-);
-
-
+//Route::get('welcome', [\App\Http\Controllers\StaticController::class, 'home'])
+//    ->name('welcome');
 
 
 // TODO: Add Routes for about and contact

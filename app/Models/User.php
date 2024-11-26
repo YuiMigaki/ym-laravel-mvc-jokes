@@ -74,11 +74,17 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    /**
+     * Get the parent user associated with this model.
+     */
     public function parent()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    /**
+     * Get all jokes associated with this model.
+     */
     public function jokes()
     {
         return $this->hasMany(Joke::class);

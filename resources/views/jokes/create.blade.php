@@ -60,7 +60,7 @@
                                     <x-input-label for="content">
                                         Content
                                     </x-input-label>
-                                    <x-text-input id="content" name="content" value="{{ old('content')  }}" />
+                                    <textarea id="content" name="content" class="block mt-1 w-full">{{ old('content') }}</textarea>
                                     <x-input-error :messages="$errors->get('content')" class="mt-2"/>
                                 </div>
 

@@ -23,7 +23,7 @@
                 @method("POST")
 
                 <x-text-input type="text" name="keywords" placeholder="User search..." value=""
-                       class="w-full md:w-auto px-4 py-2 focus:outline-none text-black"/>
+                       class="w-full h-1/5 mr-2  md:w-auto px-4 py-2 focus:outline-none text-black"/>
 
                 <x-primary-button type="submit"
                                        class="w-full md:w-auto
@@ -50,7 +50,7 @@
                        @endif
                        duration-300 ease-in-out transition-all space-x-2">
                 <i class="fa fa-trash"></i>
-                {{ $trashedCount ?? 0 }} {{ __('Deleted') }}
+                {{ $trashedCount ?? 0 }}{{ __('Deleted') }}
             </x-primary-link-button>
 
 
@@ -61,14 +61,14 @@
         @endauth
 
         <div class="flex flex-col flex-wrap my-4 mt-8">
-            <section class="grid grid-cols-1 gap-4 px-4 mt-4 sm:px-8">
+            <section class="grid grid-rows-1 gap-4 px-4 mt-4 sm:px-8">
 
                 <section class="min-w-full items-center bg-zinc-50 border border-zinc-600 rounded overflow-hidden">
-
-                    <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
-                        <thead
-                            class="border-b border-neutral-200 bg-zinc-800 font-medium text-white dark:border-white/10">
-                        <tr>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+                            <thead
+                                class="w-full border-b border-neutral-200 bg-zinc-800 font-medium text-white dark:border-white/10">
+                            <tr>
                             <th scope="col" class="px-6 py-4">#</th>
                             <th scope="col" class="px-6 py-4">Nickname</th>
                             <th scope="col" class="px-6 py-4">eMail</th>
@@ -102,7 +102,7 @@
                                         @method('DELETE')
 
                                         @auth
-                                                <x-primary-link-button href="{{ route('users.show', $user) }}"
+                                            <x-primary-link-button href="{{ route('users.show', $user) }}"
                                                                        class="bg-zinc-800">
                                                     <span>Show </span>
                                                     <i class="fa-solid fa-eye pr-2 order-first"></i>

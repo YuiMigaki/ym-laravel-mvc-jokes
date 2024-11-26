@@ -40,15 +40,24 @@ class Joke extends Model
         'user_id'
     ];
 
+    /**
+     * Define a relationship to the parent user.
+     */
     public function parent()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    /**
+     * Define a relationship to a user.
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+    /**
+     * Define a many-to-many relationship to roles.
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);

@@ -76,6 +76,9 @@ class JokeController extends Controller
 
     }
 
+    /**
+     * Search jokes.
+     */
     public function search(Request $request)
     {
         $search = $request->input('keywords');
@@ -191,12 +194,19 @@ class JokeController extends Controller
 
     }
 
+
+    /**
+     * Display a paginated list of trashed jokes.
+     */
     public function trash()
     {
         $jokes = Joke::onlyTrashed()->paginate(6);
         return view('jokes.trash', compact('jokes'));
     }
 
+    /**
+     * Restore the specified trashed joke.
+     */
     public function restore(string $id): RedirectResponse
     {
         $joke = Joke::onlyTrashed()->findOrFail($id);
@@ -227,9 +237,10 @@ class JokeController extends Controller
         }
         return redirect()->back()->with('warning', "You are not allow to restore this joke.");
 
-
-
     }
+    /**
+     * Permanently remove the specified trashed joke from storage.
+     */
     public function remove(string $id): RedirectResponse
     {
         $joke = Joke::onlyTrashed()->findOrFail($id);

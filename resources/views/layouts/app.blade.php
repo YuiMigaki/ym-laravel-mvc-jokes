@@ -16,6 +16,12 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script> <!--Reference: https://nicedit.com/demos.php-->
+        <script type="text/javascript">
+            bkLib.onDomLoaded(nicEditors.allTextAreas);
+        </script>
+
+
     </head>
     <body class="font-sans antialiased text-zinc-900">
         <div class="bg-zinc-100 mb-1">
@@ -37,6 +43,7 @@
                          w-full px-6 bg-white overflow-hidden rounded-lg">
                 {{ $slot }}
             </main>
+
 
             @include('layouts.footer')
         </div>

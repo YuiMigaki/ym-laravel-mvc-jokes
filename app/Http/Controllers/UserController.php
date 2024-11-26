@@ -97,7 +97,9 @@ class UserController extends Controller
 
     }
 
-
+    /**
+     * Search users
+     */
     public function search(Request $request)
     {
         $search = $request->input('keywords');
@@ -116,10 +118,34 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::whereId($id)->get()->first();
+        $authUser = Auth::user();
 
         if ($user) {
-            return view('users.show', compact(['user',]))
-                ->with('success', 'User found');
+
+            if ($authUser->hasRole('Superuser') || $authUser->hasAnyRole('Admin', 'Staff', 'Client')) {
+                if ($user->hasRole('Superuser') && !$authUser->hasRole('Superuser')) {
+                    return redirect(route('users.index'))
+                        ->with('warning', 'This belongs to a Superuser');
+                }
+
+                if ($user->hasRole('Admin') && !$authUser->hasRole('Superuser') && $authUser->id !== $user->id) {
+                    return redirect(route('users.index'))
+                        ->with('warning', 'This account belongs to an/other admin.');
+                }
+
+                if ($user->hasRole('Staff') && !$authUser->hasRole('Superuser') && !$authUser->hasRole('Admin') && $authUser->id !== $user->id) {
+                    return redirect(route('users.index'))
+                        ->with('warning', 'This account belongs to other staff.');
+
+                }
+
+                return view('users.show', compact(['user',]))
+                    ->with('success', 'User found');
+            }
+            return redirect(route('users.index'))
+                ->with('warning', 'You are not allowed to read this user');
+
+
         }
 
         return redirect(route('users.index'))
@@ -266,13 +292,19 @@ class UserController extends Controller
 
     }
 
-
+    /**
+     * Display a paginated list of trashed users.
+     */
     public function trash()
     {
         $users = User::onlyTrashed()->paginate(6);
         return view('users.trash', compact('users'));
     }
 
+
+    /**
+     * Restore the specified trashed user.
+     */
     public function restore(string $id): RedirectResponse
     {
         $trashedUser = User::onlyTrashed()->findOrFail($id);
@@ -284,9 +316,10 @@ class UserController extends Controller
 
             }
 
-            if ($trashedUser->hasRole('Admin') && !$user->hasRole('Superuser') && $user->id !== $trashedUser->id) {
-                return redirect()->back()->with('warning', "This belongs to an/other admin.");
-
+            if ($trashedUser->hasRole('Admin')) {
+                if (!$user->hasRole('Superuser') && !$user->hasRole('Admin')) {
+                    return redirect()->back()->with('warning', "You cannot restore this admin account.");
+                }
             }
 
             if ($trashedUser->hasRole('Staff') && !$user->hasRole('Superuser') && !$user->hasRole('Admin') && $user->id !== $trashedUser->user_id) {
@@ -301,10 +334,11 @@ class UserController extends Controller
         }
         return redirect()->back()->with('warning', "You are not allow to restore user.");
 
-
-
-
     }
+
+    /**
+     * Permanently remove the specified trashed user from storage.
+     */
     public function remove(string $id): RedirectResponse
     {
         $trashedUser = User::onlyTrashed()->findOrFail($id);

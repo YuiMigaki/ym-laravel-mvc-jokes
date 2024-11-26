@@ -14,10 +14,10 @@
                         </a>
 
                     @else
-                        <a href="{{ route('welcome') }}">
+                        <a href="{{ route('home') }}">
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
                         </a>
-@               @endauth
+               @endauth
 
                 </div>
 
@@ -28,9 +28,9 @@
                                     :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('welcome')"
-                                    :active="request()->routeIs('welcome')">
-                            {{ __('Welcome') }}
+                        <x-nav-link :href="route('home')"
+                                    :active="request()->routeIs('home')">
+                            {{ __('Home') }}
                         </x-nav-link>
                         <x-nav-link :href="route('joke')"
                                     :active="request()->routeIs('joke')">
@@ -50,9 +50,9 @@
                         @endcan
 
                     @else
-                        <x-nav-link :href="route('welcome')"
-                                    :active="request()->routeIs('welcome')">
-                            {{ __('Welcome') }}
+                        <x-nav-link :href="route('home')"
+                                    :active="request()->routeIs('home')">
+                            {{ __('Home') }}
                         </x-nav-link>
                         <x-nav-link :href="route('joke')"
                                     :active="request()->routeIs('joke')">
@@ -172,11 +172,43 @@
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
             @else
-                <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
-                    {{ __('Welcome') }}
+                <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    {{ __('Home') }}
                 </x-responsive-nav-link>
             @endauth
 
+                @auth
+
+                    <x-responsive-nav-link :href="route('home')"
+                                :active="request()->routeIs('home')">
+                        {{ __('Home') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('joke')"
+                                :active="request()->routeIs('joke')">
+                        {{ __('Joke') }}
+                    </x-responsive-nav-link>
+
+                    @if(auth()->user()->hasRole('Superuser') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Staff'))
+                        <x-responsive-nav-link :href="route('user')"
+                                    :active="request()->routeIs('user')">
+                            {{ __('User') }}
+                        </x-responsive-nav-link>
+                    @endif
+                    @can('role-assign')
+                        <x-responsive-nav-link :href="route('admin.permissions')" :active="request()->routeIs('permissions')">
+                            {{ __('Roles') }}
+                        </x-responsive-nav-link>
+                    @endcan
+
+                @else
+
+                    <x-responsive-nav-link :href="route('joke')"
+                                :active="request()->routeIs('joke')">
+                        {{ __('Joke') }}
+                    </x-responsive-nav-link>
+
+
+                @endauth
             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                 {{ __('About') }}
             </x-responsive-nav-link>
@@ -203,7 +235,7 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             @auth
                 <div class="px-4">
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->nickname }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
 
