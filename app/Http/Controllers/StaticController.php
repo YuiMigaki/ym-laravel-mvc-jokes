@@ -20,6 +20,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Joke;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StaticController extends Controller
@@ -30,9 +31,16 @@ class StaticController extends Controller
     public function home()
     {
         $random = Joke::inRandomOrder()->first();  // Reference: https://stackoverflow.com/questions/13917558/laravel-eloquent-or-fluent-random-row
+        $jokeCount = Joke::count();
+        $userCount = User::count();
+
+
         return view('static.home', [
-            'random' => $random
+            'random' => $random,
+            'jokeCount' => $jokeCount,
+            'userCount' => $userCount
         ]);
+
     }
 
 

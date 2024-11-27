@@ -24,17 +24,7 @@
                         </div>
                         <div class="rounded-r px-6 text-lime-800">
                             <h3 class="tracking-wider">Total Members</h3>
-                            <p class="text-3xl">12,768</p>
-                        </div>
-                    </section>
-
-                    <section class="flex items-center bg-amber-200 border border-amber-600 rounded overflow-hidden">
-                        <div class="rounded-l p-6 bg-amber-600 text-center">
-                            <i class="fa-solid fa-table-list text-5xl min-w-24 text-white"></i>
-                        </div>
-                        <div class="rounded-r px-6 text-amber-700">
-                            <h3 class="tracking-wider">Total Categories</h3>
-                            <p class="text-3xl">39,265</p>
+                            <p class="text-3xl">{{$userCount}}</p>
                         </div>
                     </section>
 
@@ -44,7 +34,7 @@
                         </div>
                         <div class="rounded-r px-6 text-indigo-700">
                             <h3 class="tracking-wider">Total Jokes</h3>
-                            <p class="text-3xl">142,334</p>
+                            <p class="text-3xl">{{$jokeCount}}</p>
                         </div>
                     </section>
                 </section>
