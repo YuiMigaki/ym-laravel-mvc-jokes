@@ -1,0 +1,35 @@
+{
+	"folders": {},
+	"connections": {
+		"sqlite_jdbc-1939cfff02b-2d3aa407c0a81559": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "database.sqlite",
+			"save-password": true,
+			"configuration": {
+				"database": "C:\\Users\\yuimi\\Source\\Repos\\ym-laravel-mvc-jokes\\database\\database.sqlite",
+				"url": "jdbc:sqlite:C:\\Users\\yuimi\\Source\\Repos\\ym-laravel-mvc-jokes\\database\\database.sqlite",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "通常の開発データベース",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"smart-commit": false,
+			"smart-commit-recover": true,
+			"auto-close-transactions": true,
+			"close-transactions-period": 1800,
+			"auto-close-connections": true,
+			"close-connections-period": 14400
+		}
+	}
+}
