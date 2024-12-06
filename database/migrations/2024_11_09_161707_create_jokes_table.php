@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Assessment Title: Portfolio Part 3
  * Cluster:          Cluster - SaaS: Front-End Dev - ICT50220 (Advanced Programming)
@@ -28,7 +29,7 @@ return new class extends Migration {
     {
         Schema::create('jokes', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
+            $table->text('content');
             $table->string('category');
             $table->string('title');
             $table->string('tag');
